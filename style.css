@@ -1,0 +1,247 @@
+/* ============================================== */
+/* --- GERAL E VARIÁVEIS --- */
+/* ============================================== */
+:root {
+    --cor-primaria: #030303;
+    --cor-secundaria: #FFD700;
+    --cor-branca: #FFFFFF;
+    --cor-texto-claro: #f0f0f0;
+    --cor-texto-escuro: #333;
+    --fonte-principal: 'Montserrat', sans-serif;
+    --altura-header: 100px;
+    --altura-footer: 90px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    margin: 0;
+    color: var(--cor-texto-escuro);
+    background-color: var(--cor-branca);
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================== */
+/* --- LAYOUT PRINCIPAL (SCROLL SNAP) --- */
+/* ============================================== */
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+section {
+    height: 100vh; /* REVERTIDO: De volta a 100vh para o scroll-snap funcionar */
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    /* CORREÇÃO FINAL: Padding simétrico para garantir o alinhamento vertical */
+    padding: var(--altura-header) 20px var(--altura-footer);
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Imagens e animações (sem alteração) */
+#home { background-image: url('imagens/construcao.jpg'); }
+#sobre { background-image: url('imagens/escritorio.jpg'); }
+#areas { background-image: url('imagens/predio.jpg'); }
+#blog { background-image: url('imagens/casa.jpg'); }
+#depoimentos { background-image: url('imagens/carrossel.jpg'); }
+#contato { background-image: url('imagens/direito.jpg'); }
+
+@keyframes kenburns {
+    0% { background-size: 100%; }
+    100% { background-size: 115%; }
+}
+.fundo-animado-normal { animation: kenburns 30s ease-in-out infinite alternate; }
+.fundo-animado-lento { animation: kenburns 60s ease-in-out infinite alternate; }
+
+/* ============================================== */
+/* --- CABEÇALHO E NAVEGAÇÃO --- */
+/* ============================================== */
+header {
+    background: var(--cor-primaria);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    height: var(--altura-header);
+    display: flex;
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header .logo img {
+    height: 60px;
+    display: block;
+}
+
+/* Resto do menu (sem alteração) */
+.menu-dropdown { position: relative; }
+.menu-toggle { background: none; border: none; padding: 8px; cursor: pointer; }
+.menu-toggle svg { width: 28px; height: 28px; fill: var(--cor-secundaria); transition: fill 0.3s ease; }
+.menu-toggle:hover svg { fill: var(--cor-branca); }
+.menu-content { display: none; position: absolute; top: 120%; right: 0; background-color: var(--cor-primaria); min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; list-style: none; padding: 10px 0; margin: 0; border-radius: 4px; border: 1px solid #444; }
+.menu-dropdown.is-active .menu-content { display: block; }
+.menu-content li a { color: var(--cor-secundaria); padding: 12px 20px; text-decoration: none; display: block; font-weight: bold; transition: background-color 0.3s, color 0.3s; }
+.menu-content li a:hover { background-color: var(--cor-secundaria); color: var(--cor-primaria); }
+
+/* ============================================== */
+/* --- ESTILOS DE CONTEÚDO DAS SECÇÕES --- */
+/* ============================================== */
+h1, h2 {
+    color: var(--cor-branca);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+p {
+    color: var(--cor-texto-claro);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================================================= */
+/* --- ESTILO DA "FAIXA" DE CONTEÚDO --- */
+/* ================================================================= */
+section:not(#home) .container {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px 30px;
+    border-radius: 10px;
+    max-width: 850px;
+}
+
+section:not(#home) .container h2,
+section:not(#home) .container p,
+section:not(#home) .container h3,
+section:not(#home) .container a {
+    color: var(--cor-texto-escuro);
+    text-shadow: none;
+}
+
+#contato form {
+    text-align: left;
+}
+
+/* Componentes (sem alteração) */
+#contato form { width: 100%; margin-top: 20px; }
+#contato form label { display: block; text-align: left; margin-bottom: 8px; font-weight: bold; }
+#contato form input,
+#contato form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: var(--fonte-principal); font-size: 1rem; }
+#contato form textarea { min-height: 150px; resize: vertical; }
+#contato form button { width: 100%; padding: 15px; font-size: 1.1rem; }
+.blog-post { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #ccc; }
+.blog-post:last-child { border-bottom: none; }
+.carousel-container { position: relative; max-width: 800px; margin: auto; overflow: hidden; background-color: var(--cor-branca); border-radius: 10px; color: var(--cor-texto-escuro); }
+.carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+.carousel-slide { min-width: 100%; box-sizing: border-box; padding: 40px 60px; text-align: center; }
+.carousel-slide p, .carousel-slide h3 { text-shadow: none; }
+.depoimento-texto { font-style: italic; font-size: 1.1rem; color: #555; margin-bottom: 20px; }
+.depoimento-autor { font-weight: bold; color: var(--cor-texto-escuro); }
+.carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 24px; line-height: 1; padding: 10px; cursor: pointer; border-radius: 50%; z-index: 10; transition: background-color 0.3s; }
+.carousel-button:hover { background-color: rgba(0, 0, 0, 0.8); }
+.prev-button { left: 15px; }
+.next-button { right: 15px; }
+.carousel-dots { text-align: center; padding: 15px 0 20px 0; }
+.carousel-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ddd; margin: 0 5px; cursor: pointer; transition: background-color 0.3s ease; }
+.carousel-dot.active { background-color: var(--cor-secundaria); }
+
+/* ============================================== */
+/* --- RODAPÉ --- */
+/* ============================================== */
+footer {
+    background: #000000;
+    color: #FFD700;
+    text-align: center;
+    font-size: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001; 
+    height: var(--altura-footer);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+footer p {
+    color: #FFD700;
+    text-shadow: none;
+    margin: 0;
+}
+
+/* ============================================== */
+/* --- AJUSTES RESPONSIVOS (MOBILE) --- */
+/* ============================================== */
+@media (max-width: 768px) {
+    h1, h2 { font-size: 2rem; }
+    
+    section {
+        /* Reduz o padding em mobile para dar mais espaço ao conteúdo */
+        padding: 80px 15px; 
+    }
+    
+    .menu-content { display: none; }
+    .menu-dropdown.is-active .menu-content { display: flex; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(3, 3, 3, 0.98); border: none; border-radius: 0; padding: 0; margin: 0; }
+    .menu-dropdown.is-active .menu-content li { margin: 20px 0; }
+    .menu-dropdown.is-active .menu-content li a { font-size: 1.5rem; }
+}
+
+/* ============================================== */
+/* --- ANIMAÇÃO DE FADE-IN PARA O TÍTULO ---      */
+/* ============================================== */
+
+/* Define o estado inicial do título (invisível e ligeiramente para cima) */
+#home h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Define o estado final (visível e na posição original) */
+#home h1.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

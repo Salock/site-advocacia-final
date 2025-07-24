@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Nexus Iuris | Especialistas em Direito Imobiliário</title>
+    <meta name="description" content="Segurança jurídica para seu imóvel em todas as etapas. Compra, venda, locação e regularização. Fale com especialistas.">
+    <link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/png" href="imagens/favicon.png">
+</head>
+<body>
+    <header>
+    <nav>
+        <div class="logo">
+            <img src="imagens/logo.png" alt="Logo do Escritório de Advocacia Imobiliária">
+        </div>
+
+        <div class="menu-dropdown">
+            <button class="menu-toggle" aria-label="Abrir Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="5" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="19" r="2"/>
+                </svg>
+            </button>
+            <ul class="menu-content">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#areas">Áreas de Atuação</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <div class="scroll-container">
+        <main>
+            <section id="home" class="hero fundo-animado-lento">
+                <div class="container">
+                    <h1>Segurança Jurídica para seu Imóvel. Do contrato à escritura, sem dor de cabeça.</h1>
+                    <p>Soluções jurídicas transparentes e eficientes para seus desafios imobiliários.</p>
+                    <a href="#contato" class="btn">Fale Conosco</a>
+                </div>
+            </section>
+
+            <section id="sobre" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Sobre o Escritório</h2>
+                    <p>Texto sobre a história, valores e equipe do escritório...</p>
+                </div>
+            </section>
+
+            <section id="areas" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Nossas Áreas de Atuação</h2>
+                    <p>Use esta seção para detalhar as áreas que estão no seu menu dropdown.</p>
+                </div>
+            </section>
+
+            <section id="blog" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Últimos Artigos</h2>
+                    <article class="blog-post">
+                        <h3>Como Regularizar um Imóvel: Guia Completo</h3>
+                        <p>Texto curto de introdução do artigo...</p>
+                        <a href="#">Ler Mais</a>
+                    </article>
+                    <article class="blog-post">
+                        <h3>O que Saber Antes de Comprar seu Primeiro Imóvel</h3>
+                        <p>Texto curto de introdução do artigo...</p>
+                        <a href="#">Ler Mais</a>
+                    </article>
+                </div>
+            </section>
+
+<section id="depoimentos" class="fundo-animado-normal">
+    <div class="container">
+        <h2>O Que os Nossos Clientes Dizem</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <p class="depoimento-texto">"O serviço foi impecável, transparente e muito mais rápido do que eu esperava. A equipa demonstrou um conhecimento profundo da legislação imobiliária. Recomendo vivamente!"</p>
+                    <p class="depoimento-autor">- João Silva, Investidor Imobiliário</p>
+                </div>
+                <div class="carousel-slide">
+                    <p class="depoimento-texto">"Tivemos um processo de regularização complexo e o escritório cuidou de tudo com mestria. A comunicação foi excelente em todas as etapas. Sentimo-nos sempre seguros."</p>
+                    <p class="depoimento-autor">- Maria Antunes, Proprietária</p>
+                </div>
+                <div class="carousel-slide">
+                    <p class="depoimento-texto">"Profissionalismo exemplar. Ajudaram-nos a navegar por um contrato de compra e venda com cláusulas complicadas, garantindo os nossos interesses. Serviço cinco estrelas."</p>
+                    <p class="depoimento-autor">- Carlos Ferreira, Diretor Executivo</p>
+                </div>
+            </div>
+            <button class="carousel-button prev-button">&#10094;</button>
+            <button class="carousel-button next-button">&#10095;</button>
+            <div class="carousel-dots"></div>
+        </div>
+    </div>
+</section>
+
+            <section id="contato" class="fundo-animado-lento">
+                <div class="container">
+                    <h2>Fale Conosco</h2>
+                    <p>Estamos prontos para ajudar. Envie sua mensagem!</p>
+                    <form>
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Conte-nos sobre seu caso" required></textarea>
+                        <button type="submit" class="btn">Quero uma análise do meu caso</button>
+                    </form>
+                </div>
+                <footer>
+                    <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
