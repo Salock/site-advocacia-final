@@ -245,3 +245,24 @@ footer p {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* --- ESTILOS PARA OS ÍCONES SOCIAIS NO FOOTER --- */
+
+footer .social-icons {
+    margin-bottom: 15px; /* Adiciona um espaço entre os ícones e o texto de copyright */
+}
+
+footer .social-icons a {
+    display: inline-block; /* Permite aplicar margens e transições */
+    margin: 0 10px; /* Espaçamento entre os ícones */
+    transition: transform 0.3s ease; /* Animação suave ao passar o rato */
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente o ícone ao passar o rato */
+}
+
+footer .social-icons img {
+    height: 30px; /* Tamanho dos ícones. Ajuste se necessário */
+    width: auto;
+}
