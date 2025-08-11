@@ -1,20 +1,17 @@
+// O "sinal verde" começa aqui. TODO o código ficará aqui dentro.
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO MENU DROPDOWN ---
-    // Seleciona os elementos corretos
-    const menuToggle = document.querySelector('.menu-toggle'); 
+    // (O seu código original, que estava correto)
+    const menuToggle = document.querySelector('.menu-toggle');
     const menuDropdown = document.querySelector('.menu-dropdown');
 
     if (menuToggle && menuDropdown) {
-        // Evento de clique para abrir/fechar o menu
         menuToggle.addEventListener('click', (event) => {
-            // Impede que o clique se propague para outros elementos, como o 'document'
-            event.stopPropagation(); 
-            // Usa a classe .is-active, que definimos no CSS refatorado
+            event.stopPropagation();
             menuDropdown.classList.toggle('is-active');
         });
 
-        // Fecha o menu se clicar em qualquer um dos links (para navegação na página)
         const menuLinks = menuDropdown.querySelectorAll('a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -23,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        
-        // BÓNUS: Fecha o menu se clicar em qualquer lugar fora dele
+
         document.addEventListener('click', () => {
             if (menuDropdown.classList.contains('is-active')) {
                 menuDropdown.classList.remove('is-active');
@@ -32,66 +28,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --- ROLAGEM SUAVE --- */
-    // O bloco de código para rolagem suave foi removido. 
-    // A regra 'scroll-behavior: smooth;' no seu CSS já faz este trabalho
-    // de forma mais simples e eficiente. Menos código, mesmo resultado!
-
     // --- LÓGICA DO CARROSSEL DE DEPOIMENTOS ---
+    // (O seu código original, que estava correto)
     const carouselContainer = document.querySelector('.carousel-container');
     if (carouselContainer) {
         const track = carouselContainer.querySelector('.carousel-track');
+        if (!track) return; // Segurança extra
         const slides = Array.from(track.children);
-        const nextButton = carouselContainer.querySelector('.next-button');
-        const prevButton = carouselContainer.querySelector('.prev-button');
-        const dotsNav = carouselContainer.querySelector('.carousel-dots');
+        const nextButton = carouselContainer.parentElement.querySelector('.next-button');
+        const prevButton = carouselContainer.parentElement.querySelector('.prev-button');
+        const dotsNav = carouselContainer.parentElement.querySelector('.carousel-dots');
 
-        // Apenas executa se existirem slides
-        if (slides.length > 0) {
+        if (slides.length > 0 && nextButton && prevButton && dotsNav) {
             let currentIndex = 0;
             let intervalId;
 
-            // Cria os pontos de navegação dinamicamente
             slides.forEach((slide, index) => {
                 const dot = document.createElement('button');
                 dot.classList.add('carousel-dot');
                 if (index === 0) dot.classList.add('active');
-                // Adiciona um listener a cada ponto criado
                 dot.addEventListener('click', () => {
                     moveToSlide(index);
-                    startAutoplay(); // Reinicia o timer ao clicar num ponto
+                    startAutoplay();
                 });
                 dotsNav.appendChild(dot);
             });
-            
+
             const dots = Array.from(dotsNav.children);
 
-            // Função principal para mover os slides
             const moveToSlide = (targetIndex) => {
-                // O CSS já define a largura dos slides como 100%. 
-                // Usar percentagens no transform é mais robusto e não precisa do cálculo de 'slideWidth'.
-                track.style.transform = 'translateX(-' + 100 * targetIndex + '%)';
-                
-                // Atualiza a classe 'active' no ponto de navegação
-                dots[currentIndex].classList.remove('active');
-                dots[targetIndex].classList.add('active');
-                
+                track.style.transform = `translateX(-${100 * targetIndex}%)`;
+                if(dots[currentIndex]) dots[currentIndex].classList.remove('active');
+                if(dots[targetIndex]) dots[targetIndex].classList.add('active');
                 currentIndex = targetIndex;
             };
-            
-            // Função para avançar para o próximo slide
+
             const advanceSlide = () => {
-                const nextIndex = (currentIndex + 1) % slides.length; // O '%' garante que volta ao início
+                const nextIndex = (currentIndex + 1) % slides.length;
                 moveToSlide(nextIndex);
             };
 
-            // Função para iniciar e reiniciar o autoplay
             const startAutoplay = () => {
-                clearInterval(intervalId); // Limpa qualquer timer anterior
-                intervalId = setInterval(advanceSlide, 7000); // 7 segundos
+                clearInterval(intervalId);
+                intervalId = setInterval(advanceSlide, 7000);
             };
 
-            // Navegação pelos botões
             nextButton.addEventListener('click', () => {
                 advanceSlide();
                 startAutoplay();
@@ -103,39 +84,116 @@ document.addEventListener('DOMContentLoaded', () => {
                 startAutoplay();
             });
 
-            // Pausa o carrossel quando o rato está sobre ele
             carouselContainer.addEventListener('mouseenter', () => clearInterval(intervalId));
             carouselContainer.addEventListener('mouseleave', startAutoplay);
-            
-            // Inicia o autoplay assim que a página carrega
+
             startAutoplay();
         }
     }
-});
 
-    // --- NOVA LÓGICA PARA ANIMAÇÃO REPETIDA DO TÍTULO ---
+    // --- LÓGICA PARA ANIMAÇÃO DO TÍTULO ---
     const homeSection = document.querySelector('#home');
     const heroTitle = document.querySelector('#home h1');
 
     if (homeSection && heroTitle) {
-        // Cria um "observador" que vai vigiar a secção #home
         const observer = new IntersectionObserver((entries) => {
-            // A função 'entries' é uma lista de tudo o que o observador está a vigiar (neste caso, só a #home)
             entries.forEach(entry => {
-                // 'isIntersecting' é verdadeiro se a secção estiver visível no ecrã
                 if (entry.isIntersecting) {
-                    // Se estiver visível, adiciona a classe para a animação começar
                     heroTitle.classList.add('visible');
                 } else {
-                    // Se sair do ecrã, remove a classe para "resetar" a animação para a próxima vez
                     heroTitle.classList.remove('visible');
                 }
             });
         }, {
-            threshold: 0.5 // A animação começa quando 50% da secção estiver visível
+            threshold: 0.5
         });
-
-        // Manda o observador começar a "vigiar" a secção #home
         observer.observe(homeSection);
     }
-    
+
+    // --- LÓGICA DO FORMULÁRIO COM POP-UP ---
+    const form = document.querySelector('#contato form');
+    const modal = document.getElementById('thank-you-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    if (form && modal && closeModalBtn) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            }).then(response => {
+                if (response.ok) {
+                    form.reset();
+                    modal.classList.add('is-visible');
+                } else {
+                    alert("Oops! Ocorreu um problema ao enviar a sua mensagem. Tente novamente.");
+                }
+            }).catch(error => {
+                alert("Oops! Ocorreu um problema de rede. Verifique a sua conexão.");
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('is-visible');
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('is-visible');
+            }
+        });
+    }
+
+    // --- LÓGICA PARA O BLOG DINÂMICO (CONTENTFUL) ---
+    // NOTA DE SEGURANÇA: Expor o seu Access Token no lado do cliente não é recomendado para projetos em produção.
+    // Para um projeto pessoal está OK, mas no futuro, considere usar funções serverless para proteger as suas chaves.
+    const SPACE_ID = 'p2vxqfcphky1';
+    const ACCESS_TOKEN = '-oK2OypPqIG8ZL4qx_XTs2rnn5iehc0LWEjxpa-NAMs';
+    const blogArticlesContainer = document.querySelector('#blog .container'); // Corrigido para selecionar o container dos artigos
+
+    // CORREÇÃO: Removida a verificação das chaves que impedia o código de rodar.
+    if (blogArticlesContainer && SPACE_ID && ACCESS_TOKEN) {
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigoDeBlog`;
+        
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Falha na resposta da rede');
+                return response.json();
+            })
+            .then(data => {
+                const articlesParent = document.querySelector('#blog .container');
+                if (!articlesParent) return;
+
+                // Limpa os artigos de exemplo e mantém o título
+                const oldArticles = articlesParent.querySelectorAll('.blog-post');
+                oldArticles.forEach(article => article.remove());
+
+                // Adiciona os novos artigos
+                data.items.forEach(item => {
+                    const fields = item.fields;
+                    const articleElement = document.createElement('article');
+                    articleElement.classList.add('blog-post');
+                    articleElement.innerHTML = `
+                        <h3>${fields.titulo || 'Título não encontrado'}</h3>
+                        <p>${fields.resumo || 'Resumo não encontrado'}</p>
+                        <a href="#">Ler Mais</a> 
+                    `;
+                    articlesParent.appendChild(articleElement);
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao buscar os artigos do Contentful:", error);
+                const articlesParent = document.querySelector('#blog .container');
+                if(articlesParent) {
+                    // Mantém os artigos de exemplo se a API falhar
+                    const errorP = document.createElement('p');
+                    errorP.textContent = 'Não foi possível carregar os artigos no momento.';
+                    errorP.style.color = 'orange';
+                    articlesParent.appendChild(errorP);
+                }
+            });
+    }
+
+}); // O "sinal verde" TERMINA AQUI. Todo o código está agora dentro dele.
