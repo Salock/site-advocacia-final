@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h3>${fields.titulo}</h3>
                             ${imageHtml}
                             <p>${fields.resumo}</p>
-                            <a href="#">Ler Mais</a> 
+                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a>
                         `;
                         
                         articlesParent.appendChild(articleElement);
