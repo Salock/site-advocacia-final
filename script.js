@@ -148,15 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA FINAL PARA O BLOG DINÂMICO (CONTENTFUL) ---
     // ========================================================
     
-    // Suas chaves de acesso do Contentful
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
-
     const blogContainer = document.querySelector('#blog .container');
 
     if (blogContainer) {
         
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt`;
+        // CORREÇÃO: Adicionado 'select=...' para garantir que o campo 'slug' seja retornado
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.imagemPrincipal,fields.slug`;
 
         fetch(url)
             .then(response => response.json())
@@ -171,11 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     data.items.forEach(item => {
                         const fields = item.fields;
-                        
-                        // CORREÇÃO: A variável 'articleSlug' é definida aqui
                         const articleSlug = fields.slug || '#';
-                        
                         let imageHtml = '';
+
                         if (fields.imagemPrincipal && assets.length > 0) {
                             const imageId = fields.imagemPrincipal.sys.id;
                             const imageAsset = assets.find(asset => asset.sys.id === imageId);
@@ -195,8 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const articleElement = document.createElement('article');
                         articleElement.classList.add('blog-post');
-                        
-                        // E usada aqui no link
                         articleElement.innerHTML = `
                             <h3>${fields.titulo}</h3>
                             ${imageHtml}
@@ -208,15 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             })
-            .catch(error => {
-                console.error("Erro ao buscar os artigos do Contentful:", error);
-                const articlesParent = document.querySelector('#blog .container');
-                if (articlesParent) {
-                    const errorP = document.createElement('p');
-                    errorP.textContent = 'Não foi possível carregar os artigos no momento.';
-                    articlesParent.appendChild(errorP);
-                }
-            });
+            .catch(error => console.error("Erro ao buscar os artigos do Contentful:", error));
     }
-
-}); // Fim do 'DOMContentLoaded'
+});
