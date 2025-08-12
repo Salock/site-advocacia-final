@@ -52,7 +52,7 @@ if (!slug) {
                 // IMPORTANTE: Converte o conteúdo 'Rich Text' do Contentful para HTML
                 // Se o seu campo de conteúdo completo não for Rich Text, esta parte precisará de ajuste.
                 // Assumimos que o ID do campo é 'conteudoCompleto'
-                const fullContentHtml = article.conteudoCompleto 
+                const fullContentHtml = article.conteudocompleto 
                     ? documentToHtmlString(article.conteudoCompleto) 
                     : '<p>O conteúdo completo deste artigo não está disponível.</p>';
 
