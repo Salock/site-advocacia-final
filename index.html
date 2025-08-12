@@ -121,18 +121,28 @@ Nossa equipe é composta por profissionais com vasto conhecimento em direito imo
                 <div class="container">
                     <h2>Fale Conosco</h2>
                     <p>Estamos prontos para ajudar. Envie sua mensagem!</p>
-                    <form name="contato" method="POST" data-netlify="true" action="/obrigado.html">
-					<form name="contato" method="POST" data-netlify="true">
-                        <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
-						<label for="telefone">Telefone/Celular:</label>
-						<input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-8888" required>
-                        <label for="email">E-mail:</label>
-                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
-                        <label for="mensagem">Mensagem:</label>
-                        <textarea id="mensagem" name="mensagem" placeholder="Conte-nos sobre seu caso" required></textarea>
-                        <button type="submit" class="btn">Quero uma análise do meu caso</button>
-                    </form>
+                    <form name="contato" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contato" />
+    <p style="display: none;">
+      <label>
+        Não preencha isto se for humano: <input name="bot-field" />
+      </label>
+    </p>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+
+    <label for="telefone">Telefone/Celular:</label>
+    <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-8888" required>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem" placeholder="Conte-nos sobre seu caso" required></textarea>
+    
+    <button type="submit" class="btn">Quero uma análise do meu caso</button>
+</form>
                 </div>
                 <footer>
     <div class="social-icons">
