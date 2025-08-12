@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO MENU DROPDOWN ---
-    // (O seu código original, que estava correto)
     const menuToggle = document.querySelector('.menu-toggle');
     const menuDropdown = document.querySelector('.menu-dropdown');
 
@@ -29,11 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DO CARROSSEL DE DEPOIMENTOS ---
-    // (O seu código original, que estava correto)
     const carouselContainer = document.querySelector('.carousel-container');
     if (carouselContainer) {
         const track = carouselContainer.querySelector('.carousel-track');
-        if (!track) return; // Segurança extra
+        if (!track) return; 
         const slides = Array.from(track.children);
         const nextButton = carouselContainer.parentElement.querySelector('.next-button');
         const prevButton = carouselContainer.parentElement.querySelector('.prev-button');
@@ -146,54 +144,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA PARA O BLOG DINÂMICO (CONTENTFUL) ---
-    // NOTA DE SEGURANÇA: Expor o seu Access Token no lado do cliente não é recomendado para projetos em produção.
-    // Para um projeto pessoal está OK, mas no futuro, considere usar funções serverless para proteger as suas chaves.
+    // ========================================================
+    // --- LÓGICA FINAL PARA O BLOG DINÂMICO (CONTENTFUL) ---
+    // ========================================================
+    
+    // Suas chaves de acesso do Contentful
     const SPACE_ID = 'p2vxqfcphky1';
-    const ACCESS_TOKEN = '-oK2OypPqIG8ZL4qx_XTs2rnn5iehc0LWEjxpa-NAMs';
-    const blogArticlesContainer = document.querySelector('#blog .container'); // Corrigido para selecionar o container dos artigos
+    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
 
-    // CORREÇÃO: Removida a verificação das chaves que impedia o código de rodar.
-    if (blogArticlesContainer && SPACE_ID && ACCESS_TOKEN) {
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigoDeBlog`;
+    const blogContainer = document.querySelector('#blog .container');
+
+    if (blogContainer) {
         
+        // Constrói o URL da API para buscar os seus "Artigos de Blog", ordenados pelos mais recentes
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigoDeBlog&order=-sys.createdAt`;
+
         fetch(url)
-            .then(response => {
-                if (!response.ok) throw new Error('Falha na resposta da rede');
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                const articlesParent = document.querySelector('#blog .container');
-                if (!articlesParent) return;
+                // Encontra o local onde os artigos devem ser inseridos
+                const articlesParent = blogContainer.querySelector('.blog-post')?.parentNode || blogContainer;
+                
+                if (articlesParent && data.items) {
+                    // Limpa os artigos de exemplo que estão no HTML
+                    const oldArticles = articlesParent.querySelectorAll('article.blog-post');
+                    oldArticles.forEach(article => article.remove());
 
-                // Limpa os artigos de exemplo e mantém o título
-                const oldArticles = articlesParent.querySelectorAll('.blog-post');
-                oldArticles.forEach(article => article.remove());
+                    const assets = data.includes?.Asset || [];
 
-                // Adiciona os novos artigos
-                data.items.forEach(item => {
-                    const fields = item.fields;
-                    const articleElement = document.createElement('article');
-                    articleElement.classList.add('blog-post');
-                    articleElement.innerHTML = `
-                        <h3>${fields.titulo || 'Título não encontrado'}</h3>
-                        <p>${fields.resumo || 'Resumo não encontrado'}</p>
-                        <a href="#">Ler Mais</a> 
-                    `;
-                    articlesParent.appendChild(articleElement);
-                });
+                    // Para cada artigo recebido do Contentful, cria o HTML
+                    data.items.forEach(item => {
+                        const fields = item.fields;
+                        
+                        let imageHtml = '';
+                        if (fields.imagemPrincipal && assets.length > 0) {
+                            const imageId = fields.imagemPrincipal.sys.id;
+                            const imageAsset = assets.find(asset => asset.sys.id === imageId);
+                            if (imageAsset) {
+                                const imageUrl = 'https:' + imageAsset.fields.file.url;
+                                const imageDescription = imageAsset.fields.description || fields.titulo;
+                                const imageCaption = fields.legendaDaImagem || '';
+
+                                imageHtml = `
+                                    <figure class="post-figure">
+                                        <img src="${imageUrl}" alt="${imageDescription}">
+                                        ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
+                                    </figure>
+                                `;
+                            }
+                        }
+
+                        const articleElement = document.createElement('article');
+                        articleElement.classList.add('blog-post');
+                        articleElement.innerHTML = `
+                            <h3>${fields.titulo}</h3>
+                            ${imageHtml}
+                            <p>${fields.resumo}</p>
+                            <a href="#">Ler Mais</a> 
+                        `;
+                        
+                        articlesParent.appendChild(articleElement);
+                    });
+                }
             })
             .catch(error => {
                 console.error("Erro ao buscar os artigos do Contentful:", error);
                 const articlesParent = document.querySelector('#blog .container');
-                if(articlesParent) {
-                    // Mantém os artigos de exemplo se a API falhar
+                if (articlesParent) {
                     const errorP = document.createElement('p');
                     errorP.textContent = 'Não foi possível carregar os artigos no momento.';
-                    errorP.style.color = 'orange';
                     articlesParent.appendChild(errorP);
                 }
             });
     }
 
-}); // O "sinal verde" TERMINA AQUI. Todo o código está agora dentro dele.
+}); // Fim do 'DOMContentLoaded'

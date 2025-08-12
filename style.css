@@ -327,3 +327,27 @@ footer .social-icons img {
     margin-top: 20px;
     width: 100%;
 }
+
+/* ============================================== */
+/* --- ESTILOS ADICIONAIS PARA O BLOG --- */
+/* ============================================== */
+
+.blog-post .post-figure {
+    margin: 20px 0; /* Espaçamento vertical para a imagem */
+}
+
+.blog-post .post-figure img {
+    max-width: 100%;      /* Garante que a imagem nunca ultrapasse a largura do container */
+    height: auto;         /* Mantém a proporção da imagem */
+    border-radius: 8px;   /* Cantos arredondados para a imagem */
+    display: block;       /* Evita espaços indesejados abaixo da imagem */
+    margin: 0 auto;       /* Centraliza a imagem se ela for menor que a largura total */
+}
+
+.blog-post .image-caption {
+    font-size: 0.9rem;    /* Tamanho de fonte menor para a legenda */
+    color: #777;          /* Cor cinza para a legenda */
+    text-align: center;   /* Centraliza o texto da legenda */
+    margin-top: 8px;      /* Pequeno espaço entre a imagem e a legenda */
+    font-style: italic;   /* Estilo em itálico para a legenda */
+}
