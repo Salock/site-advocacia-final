@@ -156,25 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (blogContainer) {
         
-        // Constrói o URL da API para buscar os seus "Artigos de Blog", ordenados pelos mais recentes
         const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                // Encontra o local onde os artigos devem ser inseridos
                 const articlesParent = blogContainer.querySelector('.blog-post')?.parentNode || blogContainer;
                 
                 if (articlesParent && data.items) {
-                    // Limpa os artigos de exemplo que estão no HTML
                     const oldArticles = articlesParent.querySelectorAll('article.blog-post');
                     oldArticles.forEach(article => article.remove());
 
                     const assets = data.includes?.Asset || [];
 
-                    // Para cada artigo recebido do Contentful, cria o HTML
                     data.items.forEach(item => {
                         const fields = item.fields;
+                        
+                        // CORREÇÃO: A variável 'articleSlug' é definida aqui
+                        const articleSlug = fields.slug || '#';
                         
                         let imageHtml = '';
                         if (fields.imagemPrincipal && assets.length > 0) {
@@ -196,11 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const articleElement = document.createElement('article');
                         articleElement.classList.add('blog-post');
+                        
+                        // E usada aqui no link
                         articleElement.innerHTML = `
                             <h3>${fields.titulo}</h3>
                             ${imageHtml}
                             <p>${fields.resumo}</p>
-                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a>
+                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a> 
                         `;
                         
                         articlesParent.appendChild(articleElement);
