@@ -169,38 +169,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     const assets = data.includes?.Asset || [];
 
                     data.items.forEach(item => {
-                        const fields = item.fields;
-                        const articleSlug = fields.slug || '#';
-                        let imageHtml = '';
+    const fields = item.fields;
+    
+    const articleSlug = fields.slug || '#';
+    
+    // LINHA DE DEPURAÇÃO ADICIONADA AQUI
+    console.log('Na página principal, criando link para o slug:', articleSlug); 
 
-                        if (fields.imagemPrincipal && assets.length > 0) {
-                            const imageId = fields.imagemPrincipal.sys.id;
-                            const imageAsset = assets.find(asset => asset.sys.id === imageId);
-                            if (imageAsset) {
-                                const imageUrl = 'https:' + imageAsset.fields.file.url;
-                                const imageDescription = imageAsset.fields.description || fields.titulo;
-                                const imageCaption = fields.legendaDaImagem || '';
+    let imageHtml = '';
+    if (fields.imagemPrincipal && assets.length > 0) {
+        const imageId = fields.imagemPrincipal.sys.id;
+        const imageAsset = assets.find(asset => asset.sys.id === imageId);
+        if (imageAsset) {
+            const imageUrl = 'https:' + imageAsset.fields.file.url;
+            const imageDescription = imageAsset.fields.description || fields.titulo;
+            const imageCaption = fields.legendaDaImagem || '';
 
-                                imageHtml = `
-                                    <figure class="post-figure">
-                                        <img src="${imageUrl}" alt="${imageDescription}">
-                                        ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
-                                    </figure>
-                                `;
-                            }
-                        }
+            imageHtml = `
+                <figure class="post-figure">
+                    <img src="${imageUrl}" alt="${imageDescription}">
+                    ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
+                </figure>
+            `;
+        }
+    }
 
-                        const articleElement = document.createElement('article');
-                        articleElement.classList.add('blog-post');
-                        articleElement.innerHTML = `
-                            <h3>${fields.titulo}</h3>
-                            ${imageHtml}
-                            <p>${fields.resumo}</p>
-                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a> 
-                        `;
-                        
-                        articlesParent.appendChild(articleElement);
-                    });
+    const articleElement = document.createElement('article');
+    articleElement.classList.add('blog-post');
+    
+    articleElement.innerHTML = `
+        <h3>${fields.titulo}</h3>
+        ${imageHtml}
+        <p>${fields.resumo}</p>
+        <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a> 
+    `;
+    
+    articlesParent.appendChild(articleElement);
+});
                 }
             })
             .catch(error => console.error("Erro ao buscar os artigos do Contentful:", error));

@@ -11,14 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const articleContainer = document.getElementById('article-content');
 
     // Pega os parâmetros da URL para encontrar o "slug"
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
+const params = new URLSearchParams(window.location.search);
+const slug = params.get('slug');
 
-    // Se não houver slug na URL, mostra uma mensagem de erro
-    if (!slug) {
-        articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
-        return;
-    }
+// LINHA DE DEPURAÇÃO ADICIONADA AQUI
+console.log('Na página do artigo, o slug recebido na URL foi:', slug);
+
+// Se não houver slug na URL, mostra uma mensagem de erro
+if (!slug) {
+    articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
+    return;
+}
 
     // Monta a URL da API para buscar o artigo específico pelo seu slug
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
