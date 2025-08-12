@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (blogContainer) {
         
         // Constrói o URL da API para buscar os seus "Artigos de Blog", ordenados pelos mais recentes
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigoDeBlog&order=-sys.createdAt`;
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt`;
 
         fetch(url)
             .then(response => response.json())
