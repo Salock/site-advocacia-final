@@ -1,4 +1,6 @@
-/* Estilos para a página de arquivo de artigos */
+/* ============================================== */
+/* --- ESTILOS PARA A PÁGINA DE ARQUIVO --- */
+/* ============================================== */
 
 .archive-main {
     padding-top: var(--altura-header);
@@ -23,9 +25,13 @@
     margin-bottom: 50px;
 }
 
+/* ================================================= */
+/* --- GRELHA E CARD DE ARTIGO (LAYOUT HORIZONTAL) --- */
+/* ================================================= */
+
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas em desktop */
+    grid-template-columns: 1fr; /* Grelha de uma única coluna para empilhar os banners */
     gap: 30px;
 }
 
@@ -35,10 +41,10 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     text-decoration: none;
     color: inherit;
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Ativa o Flexbox para alinhar imagem e texto lado a lado */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 220px; /* Altura mínima para o card */
 }
 
 .article-card:hover {
@@ -47,32 +53,34 @@
 }
 
 .article-card-image {
-    height: 200px;
+    width: 35%; /* A imagem ocupa 35% da largura do card */
+    flex-shrink: 0; /* Impede a imagem de encolher */
     background-size: cover;
     background-position: center;
 }
 
 .article-card-image.placeholder {
-    background-color: #e9e9e9; /* Cor para artigos sem imagem */
+    background-color: #e9e9e9;
 }
 
 .article-card-content {
-    padding: 25px;
+    padding: 25px 30px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    width: 65%; /* O conteúdo ocupa os 65% restantes */
 }
 
 .article-card-content h3 {
     margin-top: 0;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--cor-texto-escuro);
 }
 
 .article-card-content p {
     text-align: left;
     color: #555;
-    flex-grow: 1; /* Empurra o link para baixo */
+    flex-grow: 1; /* Empurra o link para o fundo do card */
     margin-bottom: 20px;
 }
 
@@ -82,15 +90,23 @@
     text-decoration: none;
 }
 
-/* Ajustes para tablets e mobile */
-@media (max-width: 992px) {
-    .articles-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-    }
-}
+/* ============================================== */
+/* --- AJUSTES RESPONSIVOS (MOBILE) --- */
+/* ============================================== */
 
+/* Em telas de celular, o card volta a ser vertical para não ficar espremido */
 @media (max-width: 768px) {
-    .articles-grid {
-        grid-template-columns: 1fr; /* 1 coluna */
+    .article-card {
+        flex-direction: column; /* Empilha a imagem em cima do texto */
+        min-height: auto;
+    }
+
+    .article-card-image {
+        width: 100%; /* Imagem ocupa a largura total */
+        height: 200px; /* Altura fixa para a imagem */
+    }
+
+    .article-card-content {
+        width: 100%; /* Conteúdo ocupa a largura total */
     }
 }
