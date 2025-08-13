@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================================
-    // --- LÓGICA FINAL PARA O BLOG DINÂMICO (CONTENTFUL) ---
+    // --- LÓGICA DOS ARTIGOS RECENTES (2 BANNERS) ---
     // ========================================================
     
     const SPACE_ID = 'p2vxqfcphky1';
@@ -154,60 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (blogContainer) {
         
-        // CORREÇÃO: Adicionado 'select=...' para garantir que o campo 'slug' seja retornado
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.imagemPrincipal,fields.slug`;
+        // ALTERAÇÃO: Adicionado '&limit=2' para buscar apenas os 2 artigos mais recentes
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.imagemPrincipal,fields.slug&limit=2`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const articlesParent = blogContainer.querySelector('.blog-post')?.parentNode || blogContainer;
+                // ALTERAÇÃO: Seleciona o novo contentor '.latest-articles-container'
+                const articlesParent = document.querySelector('.latest-articles-container');
                 
                 if (articlesParent && data.items) {
-                    const oldArticles = articlesParent.querySelectorAll('article.blog-post');
-                    oldArticles.forEach(article => article.remove());
+                    articlesParent.innerHTML = ''; // Limpa qualquer conteúdo de exemplo
 
                     const assets = data.includes?.Asset || [];
 
                     data.items.forEach(item => {
-    const fields = item.fields;
-    
-    const articleSlug = fields.slug || '#';
-    
-    // LINHA DE DEPURAÇÃO ADICIONADA AQUI
-    console.log('Na página principal, criando link para o slug:', articleSlug); 
-
-    let imageHtml = '';
-    if (fields.imagemPrincipal && assets.length > 0) {
-        const imageId = fields.imagemPrincipal.sys.id;
-        const imageAsset = assets.find(asset => asset.sys.id === imageId);
-        if (imageAsset) {
-            const imageUrl = 'https:' + imageAsset.fields.file.url;
-            const imageDescription = imageAsset.fields.description || fields.titulo;
-            const imageCaption = fields.legendaDaImagem || '';
-
-            imageHtml = `
-                <figure class="post-figure">
-                    <img src="${imageUrl}" alt="${imageDescription}">
-                    ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
-                </figure>
-            `;
-        }
-    }
-
-    const articleElement = document.createElement('article');
-    articleElement.classList.add('blog-post');
-    
-    articleElement.innerHTML = `
-        <h3>${fields.titulo}</h3>
-        ${imageHtml}
-        <p>${fields.resumo}</p>
-        <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Mais</a> 
-    `;
-    
-    articlesParent.appendChild(articleElement);
-});
-                }
-            })
-            .catch(error => console.error("Erro ao buscar os artigos do Contentful:", error));
-    }
-});
+                        const fields = item.fields;
+                        const articleSlug = fields.slug || '#';
+                        
+                        // ALTERAÇÃO: Cria um 'div' com a classe 'blog-post-banner'
