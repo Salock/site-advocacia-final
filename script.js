@@ -154,17 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (blogContainer) {
         
-        // ALTERAÇÃO: Adicionado '&limit=2' para buscar apenas os 2 artigos mais recentes
         const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.imagemPrincipal,fields.slug&limit=2`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                // ALTERAÇÃO: Seleciona o novo contentor '.latest-articles-container'
                 const articlesParent = document.querySelector('.latest-articles-container');
                 
                 if (articlesParent && data.items) {
-                    articlesParent.innerHTML = ''; // Limpa qualquer conteúdo de exemplo
+                    articlesParent.innerHTML = ''; 
 
                     const assets = data.includes?.Asset || [];
 
@@ -172,4 +170,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         const fields = item.fields;
                         const articleSlug = fields.slug || '#';
                         
-                        // ALTERAÇÃO: Cria um 'div' com a classe 'blog-post-banner'
+                        const articleElement = document.createElement('div');
+                        articleElement.classList.add('blog-post-banner');
+                        
+                        articleElement.innerHTML = `
+                            <div>
+                                <h3>${fields.titulo}</h3>
+                                <p>${fields.resumo}</p>
+                            </div>
+                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Artigo Completo</a> 
+                        `;
+                        
+                        articlesParent.appendChild(articleElement);
+                    });
+                }
+            })
+            .catch(error => console.error("Erro ao buscar os artigos do Contentful:", error));
+    
+    } // <-- ESTA CHAVETA '}' ESTAVA EM FALTA
+
+}); // Fim do 'DOMContentLoaded'
