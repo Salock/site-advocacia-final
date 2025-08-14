@@ -1,19 +1,20 @@
 /* ============================================== */
-/* --- ESTILOS DA PÁGINA DE PORTAL --- */
+/* --- ESTILOS DA PÁGINA DE PORTAL (TEMA ESCURO) --- */
 /* ============================================== */
 
 :root {
-    --cor-primaria: #030303;
-    --cor-secundaria: #FFD700;
+    --cor-primaria: #0A2E36;    /* Azul Petróleo Escuro */
+    --cor-secundaria: #C9A25E;  /* Dourado Queimado */
     --cor-branca: #FFFFFF;
+    --cor-texto-claro: rgba(255, 255, 255, 0.8);
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--cor-primaria); /* MUDANÇA: Fundo escuro */
+    color: var(--cor-texto-claro); /* MUDANÇA: Cor de texto padrão clara */
 }
 
 .portal-container {
@@ -27,11 +28,33 @@ body {
 }
 
 .logo-portal {
-    margin-bottom: 40px;
+    margin-bottom: 25px; /* Reduzido um pouco */
+	animation: fadeInUp 1s ease-out forwards;
 }
 
 .logo-portal img {
     max-height: 80px;
+    transition: transform 0.3s ease;
+	border-radius: 10px;
+}
+
+.logo-portal:hover img {
+    transform: scale(1.1);
+}
+
+.logo-portal img {
+    max-height: 80px;
+}
+
+/* NOVO: Estilo para o slogan */
+.portal-tagline {
+    font-size: 1.2rem;
+    font-weight: 300; /* Mais fino e elegante */
+    color: var(--cor-texto-claro);
+    margin-top: 0;
+    margin-bottom: 50px;
+    text-align: center;
+    max-width: 500px;
 }
 
 .options-container {
@@ -53,7 +76,7 @@ body {
     text-decoration: none;
     color: var(--cor-branca);
     display: flex;
-    align-items: flex-end; /* Alinha o conteúdo na base do card */
+    align-items: flex-end;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
@@ -63,16 +86,14 @@ body {
     box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-/* Imagens de fundo para cada card */
 #imobiliario {
     background-image: url('imagens/portal_imobiliario.jpg');
 }
 
 #migratorio {
-    background-image: url('imagens/portal_migratorio.jpg'); /* Crie ou encontre uma imagem para esta área */
+    background-image: url('imagens/portal_migratorio.jpg');
 }
 
-/* Overlay escuro para garantir a legibilidade do texto */
 .option-card::before {
     content: '';
     position: absolute;
@@ -105,27 +126,48 @@ body {
     font-size: 2rem;
     margin: 0 0 10px 0;
     text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    color: var(--cor-branca); /* Garante a cor branca */
 }
 
 .option-content p {
     font-size: 1rem;
     margin: 0;
-    opacity: 0.8;
+    opacity: 0.9; /* Aumenta um pouco a opacidade */
+    color: var(--cor-texto-claro);
 }
 
 .portal-footer {
-    margin-top: 40px;
-    color: #888;
+    margin-top: 50px;
+    color: rgba(255, 255, 255, 0.6); /* MUDANÇA: Cor do footer para branco com opacidade */
     font-size: 0.9rem;
+    text-align: center;
 }
 
 /* --- Ajustes para Mobile --- */
 @media (max-width: 768px) {
     .options-container {
-        flex-direction: column; /* Empilha os cards verticalmente */
+        flex-direction: column;
     }
     
     .option-card {
         height: 300px;
+    }
+}
+
+/* ============================================== */
+/* --- ANIMAÇÃO DE ENTRADA PARA O LOGO --- */
+/* ============================================== */
+
+@keyframes fadeInUp {
+    /* Estado inicial da animação (invisível e 20px para baixo) */
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    /* Estado final da animação (totalmente visível e na posição original) */
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
