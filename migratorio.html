@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Nexus Iuris | Especialistas em Direito Migratório</title>
+    <meta name="description" content="Assessoria completa para vistos, cidadania e residência no Brasil. Garanta a legalidade da sua estadia com nossos especialistas.">
+    <link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/png" href="imagens/favicon.png">
+</head>
+<body class="page-migratorio">
+    <header>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="imagens/logo.png" alt="Logo Nexus Iuris"></a>
+        </div>
+        <div class="menu-dropdown">
+            <button class="menu-toggle" aria-label="Abrir Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="5" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="19" r="2"/>
+                </svg>
+            </button>
+            <ul class="menu-content">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#areas">Serviços</a></li>
+                <li><a href="#blog">Artigos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+    </header>
+
+    <div class="scroll-container">
+        <main>
+            <section id="home" class="hero fundo-animado-lento">
+                <div class="container">
+                    <h1>Assessoria para Vistos e Cidadania.</h1>
+                    <p>Realize seu sonho de viver ou investir no Brasil com segurança jurídica.</p>
+                    <a href="#contato" class="btn">Inicie sua Consulta</a>
+                </div>
+            </section>
+
+            <section id="sobre" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Especialistas em Direito Migratório</h2>
+                    <p>Texto sobre a experiência do escritório com direito migratório, focando nos desafios e soluções para estrangeiros no Brasil, processos de visto, naturalização, etc.</p>
+                </div>
+            </section>
+
+            <section id="areas" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Nossos Serviços de Imigração</h2>
+                    <p>Vistos de Trabalho e Investidor</p>
+                    <p>Processos de Naturalização e Cidadania</p>
+                    <p>Regularização Migratória e Residência Permanente</p>
+                </div>
+            </section>
+
+            <section id="blog" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>Artigos sobre Imigração</h2>
+                    <div class="latest-articles-container">
+                        </div>
+                    <div class="arquivo-link-container">
+                        <a href="#" class="btn">Ver todos os artigos</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="depoimentos" class="fundo-animado-normal">
+                <div class="container">
+                    <h2>O Que Nossos Clientes Dizem</h2>
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                    <button class="carousel-button prev-button">&#10094;</button>
+                    <button class="carousel-button next-button">&#10095;</button>
+                    <div class="carousel-dots"></div>
+                </div>
+            </section>
+
+            <section id="contato" class="fundo-animado-lento">
+                <div class="container">
+                    <h2>Fale Conosco</h2>
+                    <p>Pronto para dar o próximo passo? Envie sua mensagem.</p>
+                    <form name="contato-migratorio" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contato-migratorio" />
+                        <p style="display:none;"><label>Não preencha: <input name="bot-field"></label></p>
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                        <label for="telefone">Telefone/Celular:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                        <button type="submit" class="btn">Quero uma análise do meu caso</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+         <div class="social-icons">
+            <a href="https://wa.me/5511952016791" target="_blank"><img src="imagens/whats.png" alt="WhatsApp"></a>
+            <a href="https://instagram.com/nexus.iuris/" target="_blank"><img src="imagens/insta.png" alt="Instagram"></a>
+        </div>
+        <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
+    </footer>
+    
+    <div id="thank-you-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2>Mensagem Enviada!</h2>
+            <p>Obrigado por entrar em contato. Responderemos assim que possível.</p>
+            <button id="close-modal-btn" class="btn">Fechar</button>
+        </div>
+    </div>
+	
+    <script src="migratorio.js"></script>
+</body>
+</html>

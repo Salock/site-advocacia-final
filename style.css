@@ -68,13 +68,26 @@ section::before {
     z-index: 1;
 }
 
-/* Imagens e animações (sem alteração) */
-#home { background-image: url('imagens/construcao.jpg'); }
-#sobre { background-image: url('imagens/escritorio.jpg'); }
-#areas { background-image: url('imagens/predio.jpg'); }
-#blog { background-image: url('imagens/casa.jpg'); }
-#depoimentos { background-image: url('imagens/carrossel.jpg'); }
-#contato { background-image: url('imagens/direito.jpg'); }
+/* ============================================== */
+/* --- IMAGENS DE FUNDO DAS SECÇÕES --- */
+/* ============================================== */
+
+/* --- Imagens para a Página de Direito Imobiliário --- */
+.page-imobiliario #home { background-image: url('imagens/construcao.jpg'); }
+.page-imobiliario #sobre { background-image: url('imagens/escritorio.jpg'); }
+.page-imobiliario #areas { background-image: url('imagens/predio.jpg'); }
+.page-imobiliario #blog { background-image: url('imagens/casa.jpg'); }
+.page-imobiliario #depoimentos { background-image: url('imagens/carrossel.jpg'); }
+.page-imobiliario #contato { background-image: url('imagens/direito.jpg'); }
+
+/* --- Imagens para a Página de Direito Migratório --- */
+/* NOTA: Você precisará encontrar imagens adequadas para este tema */
+.page-migratorio #home { background-image: url('imagens/migratorio_home.jpg'); }
+.page-migratorio #sobre { background-image: url('imagens/migratorio-sobre.jpg'); }
+.page-migratorio #areas { background-image: url('imagens/migratorio-areas.jpg'); }
+.page-migratorio #blog { background-image: url('imagens/migratorio-blog.jpg'); }
+.page-migratorio #depoimentos { background-image: url('imagens/migratorio-carrossel.jpg'); } 
+.page-migratorio #contato { background-image: url('imagens/migratorio-contato.jpg'); }
 
 @keyframes kenburns {
     0% { background-size: 100%; }
@@ -397,4 +410,79 @@ footer .social-icons img {
 .blog-post-banner .btn {
     margin-top: 20px;
     align-self: flex-start; /* Alinha o botão à esquerda dentro do banner */
+}
+
+/* ============================================== */
+/* --- LAYOUT DE PILARES PARA A SECÇÃO "SOBRE" --- */
+/* ============================================== */
+
+#sobre h2 {
+    text-align: center; /* Garante que o título principal da seção fique centrado */
+}
+
+/* ============================================== */
+/* --- LAYOUT DE 3 COLUNAS PARA A SECÇÃO "SOBRE" --- */
+/* ============================================== */
+
+#sobre h2 {
+    text-align: center;
+}
+
+.pilares-container {
+    display: flex; /* Usa Flexbox para criar as colunas lado a lado */
+    flex-direction: row; /* Garante a direção horizontal (padrão) */
+    gap: 40px; /* Espaço entre as colunas */
+    margin-top: 40px;
+}
+
+.pilar {
+    flex: 1; /* Faz com que cada pilar ocupe o mesmo espaço */
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 10px;
+    border-top: 3px solid var(--cor-secundaria);
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.pilar:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-5px);
+}
+
+.pilar:hover h3,
+.pilar:hover p {
+    color: var(--cor-primaria);
+  
+}
+
+.pilar h3 {
+    font-size: 1.7rem;
+    color: var(--cor-branca);
+    text-shadow: none;
+    margin-top: 0;
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+}
+
+.pilar p {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-align: justify;
+    color: var(--cor-texto-claro);
+    text-shadow: none;
+    line-height: 1.6;
+    font-size: 1rem;
+    transition: color 0.4s ease;
+}
+
+/* --- Ajustes para Mobile --- */
+@media (max-width: 768px) {
+    .pilares-container {
+        flex-direction: column; /* Em mobile, as 3 colunas empilham-se verticalmente */
+    }
+
+    .pilar h3, .pilar p {
+        text-align: center; /* Centralizamos em mobile para um look mais limpo */
+    }
 }

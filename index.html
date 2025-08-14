@@ -6,165 +6,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title>Nexus Iuris | Especialistas em Direito Imobiliário</title>
-    <meta name="description" content="Segurança jurídica para seu imóvel em todas as etapas. Compra, venda, locação e regularização. Fale com especialistas.">
-    <link rel="stylesheet" href="style.css">
+    <title>Nexus Iuris | Assessoria Jurídica Especializada</title>
+    <meta name="description" content="Assessoria jurídica especializada em Direito Imobiliário e Direito Migratório. Encontre a solução para o seu caso.">
+    
+    <link rel="stylesheet" href="portal.css"> 
+    
 	<link rel="icon" type="image/png" href="imagens/favicon.png">
 </head>
 <body>
-    <header>
-    <nav>
-        <div class="logo">
-            <img src="imagens/logo.png" alt="Logo do Escritório de Advocacia Imobiliária">
+
+    <div class="portal-container">
+        <div class="logo-portal">
+            <img src="imagens/logo.png" alt="Logo Nexus Iuris">
         </div>
 
-        <div class="menu-dropdown">
-            <button class="menu-toggle" aria-label="Abrir Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="5" r="2"/>
-                    <circle cx="12" cy="12" r="2"/>
-                    <circle cx="12" cy="19" r="2"/>
-                </svg>
-            </button>
-            <ul class="menu-content">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sobre">Sobre Nós</a></li>
-                <li><a href="#areas">Áreas de Atuação</a></li>
-                <li><a href="#blog">Artigos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
+        <div class="options-container">
+            <a href="imobiliario.html" class="option-card" id="imobiliario">
+                <div class="option-content">
+                    <h2>Direito Imobiliário</h2>
+                    <p>Soluções para a compra, venda e regularização do seu imóvel.</p>
+                </div>
+            </a>
+
+            <a href="migratorio.html" class="option-card" id="migratorio">
+                <div class="option-content">
+                    <h2>Direito Migratório</h2>
+                    <p>Assessoria para vistos, cidadania e residência no país.</p>
+                </div>
+            </a>
         </div>
-    </nav>
-</header>
 
-    <div class="scroll-container">
-        <main>
-            <section id="home" class="hero fundo-animado-lento">
-                <div class="container">
-                    <h1>Tranquilidade na compra do seu imóvel ou rescisão contratual.</h1>
-                    <p>Se o sonho virou problema, nós temos a solução!</p>
-                    <a href="#contato" class="btn">Fale Conosco</a>
-                </div>
-            </section>
-
-            <section id="sobre" class="fundo-animado-normal">
-                <div class="container">
-                    <h2>Sobre o Escritório</h2>
-                    <p>O Nexus Iuris foi fundado com a missão de atuar no mercado imobiliário, com foco na rescisão contratual de compra e venda de imóveis na planta. 
-A gênese de nossa atuação reside na constatação das inúmeras vulnerabilidades e dissabores enfrentados por adquirentes de imóveis, que frequentemente se deparam com a falta de transparência, atrasos na entrega e onerosidade excessiva por parte das construtoras e incorporadoras.
-Com uma visão estratégica e humanizada, identificamos a necessidade premente de um suporte jurídico especializado que pudesse não apenas amparar, mas principalmente resguardar os direitos do consumidor, figura hipossuficiente diante do grande poder econômico e jurídico das grandes empresas.
-Oferecemos soluções jurídicas eficazes para a resolução de conflitos, garantindo a restituição de valores pagos, anulação de cláusulas e multas abusivas e a justa reparação por danos morais.
-Nossa equipe é composta por profissionais com vasto conhecimento em direito imobiliário e do consumidor. Dedicamo-nos integralmente a cada caso, buscando a melhor estratégia para assegurar que os direitos de nossos clientes sejam integralmente preservados.
-</p>
-                </div>
-            </section>
-
-            <section id="areas" class="fundo-animado-normal">
-                <div class="container">
-                    <h2>Nossas Áreas de Atuação</h2>
-                    <p>Contratos e Rescisões</p>
-					<p>	Direito do Consumidor</p>
-					<p>	Direito imobiliário</p>
-                </div>
-            </section>
-
-            <section id="blog" class="fundo-animado-normal">
-				<div class="container">
-					<h2>Artigos Recentes</h2>
-        
-					<div class="latest-articles-container">
-						</div>
-
-					<div class="arquivo-link-container">
-            <a href="arquivo.html" class="btn">Ver Arquivo Completo</a>
-        </div>
-    </div>
-</section>
-
-<section id="depoimentos" class="fundo-animado-normal">
-    <div class="container">
-        <h2>O Que os Nossos Clientes Dizem</h2>
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <div class="carousel-slide">
-                    <p class="depoimento-texto">" Depois de tanta dor de cabeça com a construtora, encontrei na Nexus Iuris a segurança e solução para meus problemas”</p>
-                    <p class="depoimento-autor">- A. L. Costa </p>
-                </div>
-                <div class="carousel-slide">
-                    <p class="depoimento-texto">"Profissionais que realmente se importam com o cliente. Fui bem orientado em cada etapa do meu processo e consegui meu dinheiro de volta."</p>
-                    <p class="depoimento-autor">- P. Oliveira</p>
-                </div>
-				<div class="carousel-slide">
-                    <p class="depoimento-texto">“Só quem já teve o sonho destruído por uma construtora, sabe como é desesperador. A equipe Nexus Iuris foi fundamental na rescisão do meu contrato e devolução dos valores que paguei.”</p>
-                    <p class="depoimento-autor">- J.F. A. Santos</p>
-                </div>
-				<div class="carousel-slide">
-                    <p class="depoimento-texto">“Comprei um apartamento da planta e me arrependi, achei que meu dinheiro estava perdido, mas com a ajuda da empresa consegui meu dinheiro de volta.”</p>
-                    <p class="depoimento-autor">- C.A. Moura</p>
-                </div>
-                <div class="carousel-slide">
-                    <p class="depoimento-texto">“Profissionais sérios de muita confiança. Obrigada por tudo”</p>
-                    <p class="depoimento-autor">- M. T. M. Lima</p>
-                </div>
-            </div>
-            <button class="carousel-button prev-button">&#10094;</button>
-            <button class="carousel-button next-button">&#10095;</button>
-            <div class="carousel-dots"></div>
-        </div>
-    </div>
-</section>
-
-            <section id="contato" class="fundo-animado-lento">
-                <div class="container">
-                    <h2>Fale Conosco</h2>
-                    <p>Estamos prontos para ajudar. Envie sua mensagem!</p>
-                    <form name="contato" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="contato" />
-    <p style="display: none;">
-      <label>
-        Não preencha isto se for humano: <input name="bot-field" />
-      </label>
-    </p>
-
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
-
-    <label for="telefone">Telefone/Celular:</label>
-    <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-8888" required>
-
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
-
-    <label for="mensagem">Mensagem:</label>
-    <textarea id="mensagem" name="mensagem" placeholder="Conte-nos sobre seu caso" required></textarea>
-    
-    <button type="submit" class="btn">Quero uma análise do meu caso</button>
-</form>
-                </div>
-                <footer>
-    <div class="social-icons">
-        <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer">
-            <img src="imagens/whats.png" alt="Ícone do WhatsApp">
-        </a>
-        <a href="https://instagram.com/nexus.iuris/" target="_blank" rel="noopener noreferrer">
-            <img src="imagens/insta.png" alt="Ícone do Instagram">
-        </a>
-    </div>
-    <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
-</footer>
-            </section>
-        </main>
+        <footer class="portal-footer">
+            <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
-	
-	<div id="thank-you-modal" class="modal-overlay">
-    <div class="modal-box">
-        <h2>Mensagem Enviada!</h2>
-        <p>Obrigado por entrar em contato. Responderemos assim que possível.</p>
-        <button id="close-modal-btn" class="btn">Fechar</button>
-    </div>
-</div>
-	
 </body>
 </html>
