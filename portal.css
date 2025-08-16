@@ -38,8 +38,10 @@ body {
 	border-radius: 10px;
 }
 
+@media (hover: hover) {
 .logo-portal:hover img {
     transform: scale(1.1);
+	}
 }
 
 .logo-portal img {
