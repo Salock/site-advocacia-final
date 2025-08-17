@@ -74,10 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================================
-    // --- LÓGICA DO CARROSSEL DA SECÇÃO "SOBRE" (COM AUTOPLAY) ---
+    // --- LÓGICA DO CARROSSEL DA SECÇÃO "SOBRE" (APENAS EM MOBILE) ---
     // ========================================================
-    const sobreContainer = document.querySelector('#sobre');
-    if (sobreContainer) {
+
+    // Função que verifica se a largura da janela é de um dispositivo móvel
+    const isMobile = () => window.innerWidth <= 768;
+
+    // Função que encapsula toda a lógica do carrossel
+    const setupSobreCarousel = () => {
+        const sobreContainer = document.querySelector('#sobre');
+        if (!sobreContainer) return; // Sai se a secção não existir
+
         const track = sobreContainer.querySelector('.pilares-carousel-track');
         const prevButton = sobreContainer.querySelector('.sobre-prev');
         const nextButton = sobreContainer.querySelector('.sobre-next');
@@ -95,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (index === 0) dot.classList.add('active');
                     dot.addEventListener('click', () => {
                         moveToSlide(index);
-                        resetInterval(); // Reinicia o timer ao clicar
+                        resetInterval();
                     });
                     dotsNav.appendChild(dot);
                 });
@@ -112,16 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const advanceSlide = () => {
                     moveToSlide((currentIndex + 1) % slides.length);
                 };
-
-                // --- LÓGICA DE AUTOPLAY ADICIONADA AQUI ---
-                let intervalId = setInterval(advanceSlide, 4000); // 4 segundos por slide
+                
+                let intervalId = setInterval(advanceSlide, 4000);
 
                 const resetInterval = () => {
                     clearInterval(intervalId);
                     intervalId = setInterval(advanceSlide, 4000);
                 };
 
-                // Pausa ao passar o rato (bom para usabilidade, mesmo em mobile funciona com toque longo)
                 sobreContainer.addEventListener('mouseenter', () => clearInterval(intervalId));
                 sobreContainer.addEventListener('mouseleave', resetInterval);
 
@@ -134,21 +139,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     moveToSlide((currentIndex - 1 + slides.length) % slides.length);
                     resetInterval();
                 });
-                // --- FIM DA LÓGICA DE AUTOPLAY ---
 
             } else {
                 prevButton.style.display = 'none';
                 nextButton.style.display = 'none';
             }
         }
-    }
+    };
 
+    // **A MUDANÇA PRINCIPAL ESTÁ AQUI**
+    // Executa a função do carrossel apenas se a condição isMobile() for verdadeira
+    if (isMobile()) {
+        setupSobreCarousel();
+    }
+    
     // --- LÓGICA DOS ARTIGOS RECENTES ---
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
     const blogContainer = document.querySelector('#blog .container');
     if (blogContainer) {
-        // ... (código do Contentful, sem alterações) ...
         const isMigratorioPage = document.body.classList.contains('page-migratorio');
         const categoria = isMigratorioPage ? 'Direito Migratório' : 'Direito Imobiliário';
         const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.slug&fields.categoria=${categoria}&limit=2`;
