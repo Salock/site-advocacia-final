@@ -365,6 +365,21 @@ footer .social-icons img {
     font-style: italic;   /* Estilo em itálico para a legenda */
 }
 
+/* --- ESTILO PARA O AUTOR DO ARTIGO DO BLOG --- */
+.blog-post .post-author {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: right; /* Alinha à direita para um visual limpo */
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee; /* Linha separadora subtil */
+    font-style: italic;
+}
+
+.blog-post .post-author strong {
+    font-style: normal;
+}
+
 /* ============================================== */
 /* --- ESTILOS DOS BANNERS DE ARTIGOS RECENTES --- */
 /* ============================================== */
