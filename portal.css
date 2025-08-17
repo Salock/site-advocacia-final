@@ -44,10 +44,6 @@ body {
 	}
 }
 
-.logo-portal img {
-    max-height: 80px;
-}
-
 /* NOVO: Estilo para o slogan */
 .portal-tagline {
     font-size: 1.2rem;

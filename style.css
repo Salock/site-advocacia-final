@@ -412,51 +412,49 @@ footer .social-icons img {
     align-self: flex-start; /* Alinha o botão à esquerda dentro do banner */
 }
 
-/* ============================================== */
-/* --- LAYOUT DE PILARES PARA A SECÇÃO "SOBRE" --- */
-/* ============================================== */
-
-#sobre h2 {
-    text-align: center; /* Garante que o título principal da seção fique centrado */
-}
-
-/* ============================================== */
-/* --- LAYOUT DE 3 COLUNAS PARA A SECÇÃO "SOBRE" --- */
-/* ============================================== */
+/* ================================================================= */
+/* --- LAYOUT FINAL DA SECÇÃO "SOBRE" (Desktop Colunas / Mobile Carrossel) --- */
+/* ================================================================= */
 
 #sobre h2 {
     text-align: center;
+    margin-bottom: 40px;
 }
 
-.pilares-container {
-    display: flex; /* Usa Flexbox para criar as colunas lado a lado */
-    flex-direction: row; /* Garante a direção horizontal (padrão) */
-    gap: 40px; /* Espaço entre as colunas */
-    margin-top: 40px;
+.sobre-container {
+    position: relative;
+    /* Adicionado para garantir que o container se ajuste ao conteúdo */
+    width: 100%; 
 }
 
 .pilar {
-    flex: 1; /* Faz com que cada pilar ocupe o mesmo espaço */
     background-color: rgba(255, 255, 255, 0.05);
     padding: 30px;
     border-radius: 10px;
     border-top: 3px solid var(--cor-secundaria);
     transition: background-color 0.4s ease, transform 0.4s ease;
+    /* Removido height: 100% para permitir que a altura seja automática */
+    display: flex;
+    flex-direction: column;
 }
 
+/* Efeito hover aprimorado */
+@media (hover: hover) {
 .pilar:hover {
-    background-color: var(--cor-secundaria);
-    transform: translateY(-5px);
+background-color: var(--cor-secundaria);
+transform: translateY(-5px);
 }
-
-.pilar:hover h3,
-.pilar:hover p {
-    color: var(--cor-primaria);
-  
+.pilar:hover h3, .pilar:hover p {
+color: var(--cor-primaria);
+/* Mantendo a hifenização no hover */
+-webkit-hyphens: auto;
+-ms-hyphens: auto;
+hyphens: auto;
+}
 }
 
 .pilar h3 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     color: var(--cor-branca);
     text-shadow: none;
     margin-top: 0;
@@ -465,24 +463,82 @@ footer .social-icons img {
 }
 
 .pilar p {
+    /* Propriedades de hifenização para o estado padrão */
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
+    word-break: break-word; /* Garante a quebra de palavras longas */
     text-align: justify;
     color: var(--cor-texto-claro);
     text-shadow: none;
     line-height: 1.6;
     font-size: 1rem;
     transition: color 0.4s ease;
+    /* flex-grow permite que o parágrafo ocupe o espaço disponível */
+    flex-grow: 1; 
 }
 
-/* --- Ajustes para Mobile --- */
-@media (max-width: 768px) {
-    .pilares-container {
-        flex-direction: column; /* Em mobile, as 3 colunas empilham-se verticalmente */
+/* --- Layout para DESKTOP (3 Colunas) --- */
+@media (min-width: 769px) {
+    .pilares-carousel-track {
+        display: flex;
+        gap: 40px;
+        /* Alinha os itens para que comecem no topo */
+        align-items: flex-start; 
     }
+    .pilar {
+        /* flex: 1; pode ser mantido, mas flex-basis é mais específico */
+        flex: 1 1 0;
+        min-width: 0; /* Previne que o flex item cresça indefinidamente */
+    }
+    #sobre .carousel-button,
+    #sobre .carousel-dots {
+        display: none;
+    }
+}
 
+/* --- Layout para MOBILE (Carrossel) --- */
+@media (max-width: 768px) {
+    .sobre-container {
+        padding: 0 20px;
+    }
+    .pilares-carousel-container {
+        overflow: hidden;
+    }
+    .pilares-carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    .pilar {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
     .pilar h3, .pilar p {
-        text-align: center; /* Centralizamos em mobile para um look mais limpo */
+        text-align: center;
+        -webkit-hyphens: none; -ms-hyphens: none; hyphens: none;
+    }
+    #sobre .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none; border: none;
+        color: var(--cor-branca);
+        font-size: 2.5rem;
+        cursor: pointer;
+        z-index: 5;
+    }
+    #sobre .prev-button { left: -10px; }
+    #sobre .next-button { right: -10px; }
+    #sobre .carousel-dots {
+        text-align: center;
+        padding-top: 20px;
+    }
+    #sobre .carousel-dots .carousel-dot {
+        display: inline-block; width: 10px; height: 10px;
+        border-radius: 50%; background-color: rgba(255, 255, 255, 0.5);
+        margin: 0 5px; cursor: pointer;
+    }
+    #sobre .carousel-dots .carousel-dot.active {
+        background-color: var(--cor-branca);
     }
 }
