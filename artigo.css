@@ -66,3 +66,24 @@
         font-size: 2rem;
     }
 }
+
+/* Estilos para imagens incorporadas no corpo do artigo */
+.article-body .embedded-asset {
+    margin: 40px auto; /* Centraliza a figura e dá espaço vertical */
+    max-width: 100%;
+    text-align: center;
+}
+
+.article-body .embedded-asset img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Sombra suave */
+}
+
+.article-body .embedded-asset figcaption {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 10px;
+    font-style: italic;
+}
