@@ -4,16 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Suas chaves de acesso do Contentful
     const SPACE_ID = 'p2vxqfcphky1';
-    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4'; // Recomendo usar a chave de "Content Delivery"
+    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
     
-    // Elemento no HTML onde o artigo será inserido
     const articleContainer = document.getElementById('article-content');
     
     // Pega o "slug" (identificador do artigo) do endereço URL
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
 
-    // Se não houver slug no URL, mostra uma mensagem de erro e para a execução
     if (!slug) {
         if (articleContainer) {
             articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Identificador do artigo não fornecido no URL.</p>';
@@ -21,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Monta a URL da API para buscar o artigo específico pelo seu slug
-    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
+    // URL FINAL E CORRIGIDA: Adicionado o parâmetro 'select' para garantir que todos os campos necessários sejam retornados
+    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}&select=sys.createdAt,fields.titulo,fields.imagemPrincipal,fields.legendaDaImagem,fields.autorDoTexto,fields.conteudoCompleto`;
 
     fetch(url)
         .then(response => {
@@ -37,12 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fields = item.fields;
                 const assets = data.includes?.Asset || [];
 
-                // Define o título da aba do navegador
                 document.title = `${fields.titulo || 'Artigo'} | Nexus Iuris`;
 
-                // Monta o HTML da imagem principal, se existir
                 let imageHtml = '';
-                if (fields.imagemPrincipal && assets) {
+                if (fields.imagemPrincipal && assets.length > 0) {
                     const imageId = fields.imagemPrincipal.sys.id;
                     const imageAsset = assets.find(asset => asset.sys.id === imageId);
                     if (imageAsset) {
@@ -58,22 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 
-                // Monta o HTML do autor, se existir
                 let authorHtml = '';
                 if (fields.autorDoTexto) {
                     authorHtml = `por <strong>${fields.autorDoTexto}</strong>`;
                 }
                 
-                // Monta o HTML do conteúdo completo, usando o renderizador de Rich Text
                 let fullContentHtml = '';
-                // CORREÇÃO FINAL: Garante que estamos a procurar por 'conteudoCompleto'
                 if (fields.conteudoCompleto && window.richTextHtmlRenderer) {
                     fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudoCompleto);
                 } else {
                     fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
                 }
 
-                // Insere todo o HTML gerado na página
                 articleContainer.innerHTML = `
                     <h1>${fields.titulo}</h1>
                     <div class="article-meta">
