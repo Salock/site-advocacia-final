@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Lógica para buscar e exibir o artigo ---
-
-    // Suas chaves de acesso (as mesmas da página principal)
     const SPACE_ID = 'p2vxqfcphky1';
-    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
-
+    const ACCESS_TOKEN = '-oK2OypPqIG8ZL4qx_XTs2rnn5iehc0LWEjxpa-NAMs';
+    
     const articleContainer = document.getElementById('article-content');
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
 
     if (!slug) {
-        articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
+        if(articleContainer) articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Slug não fornecido no URL.</p>';
         return;
     }
 
@@ -21,14 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.items && data.items.length > 0) {
-                const article = data.items[0];
-                const fields = article.fields;
+                const item = data.items[0];
+                const fields = item.fields;
                 const assets = data.includes?.Asset || [];
 
-                document.title = fields.titulo + ' | Nexus Iuris';
+                document.title = `${fields.titulo} | Nexus Iuris`;
 
                 let imageHtml = '';
-                if (fields.imagemPrincipal) {
+                if (fields.imagemPrincipal && assets) {
                     const imageId = fields.imagemPrincipal.sys.id;
                     const imageAsset = assets.find(asset => asset.sys.id === imageId);
                     if (imageAsset) {
@@ -49,21 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     authorHtml = `por <strong>${fields.autorDoTexto}</strong>`;
                 }
                 
-                // --- CORREÇÃO IMPORTANTE PARA LER O RICH TEXT COM FORMATAÇÃO ---
                 let fullContentHtml = '';
-                // Verifica se o campo existe e se a biblioteca do Contentful foi carregada
                 if (fields.conteudoCompleto && window.richTextHtmlRenderer) {
-                    // Usa a biblioteca para converter o Rich Text em HTML corretamente
                     fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudoCompleto);
                 } else {
                     fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
                 }
-                // --- FIM DA CORREÇÃO ---
 
                 articleContainer.innerHTML = `
                     <h1>${fields.titulo}</h1>
                     <div class="article-meta">
-                        <span>Publicado em ${new Date(article.sys.createdAt).toLocaleDateString('pt-BR')}</span>
+                        <span>Publicado em ${new Date(item.sys.createdAt).toLocaleDateString('pt-BR')}</span>
                         ${authorHtml ? `<span> &bull; ${authorHtml}</span>` : ''}
                     </div>
                     ${imageHtml}
@@ -73,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
             } else {
-                articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2>';
+                articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Não foi encontrado nenhum artigo com este identificador.</p>';
             }
         })
         .catch(error => {
