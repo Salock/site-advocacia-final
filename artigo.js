@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const SPACE_ID = 'p2vxqfcphky1';
-    const ACCESS_TOKEN = '-oK2OypPqIG8ZL4qx_XTs2rnn5iehc0LWEjxpa-NAMs';
+    // NOTA: A sua chave de acesso anterior (-oK2...) parecia ser a de Preview. 
+    // Garanta que esta é a chave correta de "Content Delivery API".
+    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4'; 
     
     const articleContainer = document.getElementById('article-content');
     const params = new URLSearchParams(window.location.search);
@@ -12,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // ESTA É A URL FINAL E CORRETA
-    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=conteudo&fields.slug=${slug}`;
+    // A URL FINAL E CORRETA COM "content_type=artigos"
+    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
 
     fetch(url)
         .then(response => {
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            if (data.items && data.items.length > 0) {
+            if (articleContainer && data.items && data.items.length > 0) {
                 const item = data.items[0];
                 const fields = item.fields;
                 const assets = data.includes?.Asset || [];
@@ -53,8 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 let fullContentHtml = '';
-                if (fields.conteudoCompleto && window.richTextHtmlRenderer) {
-                    fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudoCompleto);
+                // Verifica se o campo e a biblioteca do Contentful existem
+                if (fields.conteudo && window.richTextHtmlRenderer) {
+                    fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudo);
                 } else {
                     fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
                 }
@@ -77,6 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error("Erro ao buscar o artigo do Contentful:", error);
-            articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2>';
+            if(articleContainer) articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2>';
         });
 });
