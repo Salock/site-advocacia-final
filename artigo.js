@@ -1,4 +1,3 @@
-// Espera o DOM carregar completamente
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Lógica para buscar e exibir o artigo ---
@@ -7,35 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
 
-    // Pega o container do artigo no HTML
     const articleContainer = document.getElementById('article-content');
-
-    // Pega os parâmetros da URL para encontrar o "slug"
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
 
-    // Se não houver slug na URL, mostra uma mensagem de erro
     if (!slug) {
         articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
         return;
     }
 
-    // Monta a URL da API para buscar o artigo específico pelo seu slug
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Verifica se a API encontrou o artigo
             if (data.items && data.items.length > 0) {
-                const article = data.items[0]; // Pega o artigo completo
+                const article = data.items[0];
                 const fields = article.fields;
                 const assets = data.includes?.Asset || [];
 
-                // Define o título da aba do navegador com o título do artigo
                 document.title = fields.titulo + ' | Nexus Iuris';
 
-                // --- Lógica da Imagem (Reutilizada) ---
                 let imageHtml = '';
                 if (fields.imagemPrincipal) {
                     const imageId = fields.imagemPrincipal.sys.id;
@@ -43,37 +34,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (imageAsset) {
                         const imageUrl = 'https:' + imageAsset.fields.file.url;
                         const imageDescription = imageAsset.fields.description || fields.titulo;
-                        imageHtml = `<img src="${imageUrl}" alt="${imageDescription}" class="article-main-image">`;
+                        const imageCaption = fields.legendaDaImagem || '';
+                        imageHtml = `
+                            <figure class="post-figure">
+                                <img src="${imageUrl}" alt="${imageDescription}" class="article-main-image">
+                                ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
+                            </figure>
+                        `;
                     }
                 }
                 
-                // --- Lógica do Autor (ADICIONADA) ---
                 let authorHtml = '';
                 if (fields.autorDoTexto) {
                     authorHtml = `por <strong>${fields.autorDoTexto}</strong>`;
                 }
-
-                // --- CORREÇÃO: Lógica para converter o Conteúdo Completo (Rich Text) para HTML ---
+                
+                // --- CORREÇÃO IMPORTANTE PARA LER O RICH TEXT COM FORMATAÇÃO ---
                 let fullContentHtml = '';
-                if (fields.conteudoCompleto && fields.conteudoCompleto.content) {
-                    fields.conteudoCompleto.content.forEach(node => {
-                        // Converte parágrafos
-                        if (node.nodeType === 'paragraph') {
-                            let paragraphText = '';
-                            node.content.forEach(innerNode => {
-                                if (innerNode.nodeType === 'text') {
-                                    paragraphText += innerNode.value;
-                                }
-                            });
-                            fullContentHtml += `<p>${paragraphText}</p>`;
-                        }
-                        // Adicione mais 'if' aqui para outros tipos de nós (cabeçalhos H2, H3, listas, etc.) se precisar
-                    });
+                // Verifica se o campo existe e se a biblioteca do Contentful foi carregada
+                if (fields.conteudoCompleto && window.richTextHtmlRenderer) {
+                    // Usa a biblioteca para converter o Rich Text em HTML corretamente
+                    fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudoCompleto);
                 } else {
                     fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
                 }
+                // --- FIM DA CORREÇÃO ---
 
-                // Preenche o container do artigo com o conteúdo completo
                 articleContainer.innerHTML = `
                     <h1>${fields.titulo}</h1>
                     <div class="article-meta">
@@ -85,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${fullContentHtml}
                     </div>
                 `;
+
             } else {
                 articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2>';
             }
