@@ -110,3 +110,18 @@
         width: 100%; /* Conteúdo ocupa a largura total */
     }
 }
+
+/* --- ESTILO PARA O AUTOR DO ARTIGO (PÁGINA DE ARQUIVO) --- */
+.article-card-content .post-author {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: right;
+    margin-top: auto; /* Empurra o autor para o fundo do card */
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-style: italic;
+}
+
+.article-card-content .post-author strong {
+    font-style: normal;
+}

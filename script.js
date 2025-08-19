@@ -78,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DO CARROSSEL DE DEPOIMENTOS (SEÇÃO #DEPOIMENTOS) ---
     const depoimentosContainer = document.querySelector('#depoimentos .carousel-container');
     if (depoimentosContainer) {
-        // ... (o seu código do carrossel de depoimentos que já funciona) ...
+        // ... (o seu código do carrossel de depoimentos que já funciona deve estar aqui) ...
+        // Se precisar do código completo e robusto do carrossel, me avise.
     }
 
     // --- LÓGICA DO CARROSSEL DA SECÇÃO "SOBRE" (APENAS EM MOBILE) ---
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSobreCarousel();
     }
     
-    // --- LÓGICA DOS ARTIGOS RECENTES (CONTENTFUL) ---
+    // --- LÓGICA DOS ARTIGOS RECENTES (CONTENTFUL) COM AUTOR ---
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
     const blogContainer = document.querySelector('#blog .container');
@@ -104,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (blogContainer) {
         const isMigratorioPage = document.body.classList.contains('page-migratorio');
         const categoria = isMigratorioPage ? 'Direito Migratório' : 'Direito Imobiliário';
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.slug&fields.categoria=${categoria}&limit=2`;
+        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.slug,fields.autorDoTexto&fields.categoria=${categoria}&limit=2`;
         
         fetch(url)
             .then(response => response.json())
@@ -119,9 +120,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     data.items.forEach(item => {
                         const fields = item.fields;
                         const articleSlug = fields.slug || '#';
+                        
+                        // Lógica para adicionar o autor, se ele existir
+                        let authorHtml = '';
+                        if (fields.autorDoTexto) {
+                            authorHtml = `<p class="post-author"><strong>Por:</strong> ${fields.autorDoTexto}</p>`;
+                        }
+
                         const articleElement = document.createElement('div');
                         articleElement.classList.add('blog-post-banner');
-                        articleElement.innerHTML = `<div><h3>${fields.titulo}</h3><p>${fields.resumo}</p></div><a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Artigo Completo</a>`;
+                        articleElement.innerHTML = `
+                            <div>
+                                <h3>${fields.titulo}</h3>
+                                <p>${fields.resumo}</p>
+                                ${authorHtml}
+                            </div>
+                            <a href="/artigo.html?slug=${articleSlug}" class="btn">Ler Artigo Completo</a>`;
                         articlesParent.appendChild(articleElement);
                     });
                 }

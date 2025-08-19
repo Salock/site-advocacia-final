@@ -11,17 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const articleContainer = document.getElementById('article-content');
 
     // Pega os parâmetros da URL para encontrar o "slug"
-const params = new URLSearchParams(window.location.search);
-const slug = params.get('slug');
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
 
-// LINHA DE DEPURAÇÃO ADICIONADA AQUI
-console.log('Na página do artigo, o slug recebido na URL foi:', slug);
-
-// Se não houver slug na URL, mostra uma mensagem de erro
-if (!slug) {
-    articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
-    return;
-}
+    // Se não houver slug na URL, mostra uma mensagem de erro
+    if (!slug) {
+        articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Por favor, volte à página de artigos e selecione um.</p>';
+        return;
+    }
 
     // Monta a URL da API para buscar o artigo específico pelo seu slug
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
@@ -31,36 +28,58 @@ if (!slug) {
         .then(data => {
             // Verifica se a API encontrou o artigo
             if (data.items && data.items.length > 0) {
-                const article = data.items[0].fields;
+                const article = data.items[0]; // Pega o artigo completo
+                const fields = article.fields;
                 const assets = data.includes?.Asset || [];
 
                 // Define o título da aba do navegador com o título do artigo
-                document.title = article.titulo + ' | Nexus Iuris';
+                document.title = fields.titulo + ' | Nexus Iuris';
 
-                // Busca a imagem principal (lógica reutilizada)
+                // --- Lógica da Imagem (Reutilizada) ---
                 let imageHtml = '';
-                if (article.imagemPrincipal) {
-                    const imageId = article.imagemPrincipal.sys.id;
+                if (fields.imagemPrincipal) {
+                    const imageId = fields.imagemPrincipal.sys.id;
                     const imageAsset = assets.find(asset => asset.sys.id === imageId);
                     if (imageAsset) {
                         const imageUrl = 'https:' + imageAsset.fields.file.url;
-                        const imageDescription = imageAsset.fields.description || article.titulo;
+                        const imageDescription = imageAsset.fields.description || fields.titulo;
                         imageHtml = `<img src="${imageUrl}" alt="${imageDescription}" class="article-main-image">`;
                     }
                 }
+                
+                // --- Lógica do Autor (ADICIONADA) ---
+                let authorHtml = '';
+                if (fields.autorDoTexto) {
+                    authorHtml = `por <strong>${fields.autorDoTexto}</strong>`;
+                }
 
-                // IMPORTANTE: Converte o conteúdo 'Rich Text' do Contentful para HTML
-                // Se o seu campo de conteúdo completo não for Rich Text, esta parte precisará de ajuste.
-                // Assumimos que o ID do campo é 'conteudoCompleto'
-                const fullContentHtml = article.conteudo
-                    ? documentToHtmlString(article.conteudo) 
-                    : '<p>O conteúdo completo deste artigo não está disponível.</p>';
-
+                // --- CORREÇÃO: Lógica para converter o Conteúdo Completo (Rich Text) para HTML ---
+                let fullContentHtml = '';
+                if (fields.conteudoCompleto && fields.conteudoCompleto.content) {
+                    fields.conteudoCompleto.content.forEach(node => {
+                        // Converte parágrafos
+                        if (node.nodeType === 'paragraph') {
+                            let paragraphText = '';
+                            node.content.forEach(innerNode => {
+                                if (innerNode.nodeType === 'text') {
+                                    paragraphText += innerNode.value;
+                                }
+                            });
+                            fullContentHtml += `<p>${paragraphText}</p>`;
+                        }
+                        // Adicione mais 'if' aqui para outros tipos de nós (cabeçalhos H2, H3, listas, etc.) se precisar
+                    });
+                } else {
+                    fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
+                }
 
                 // Preenche o container do artigo com o conteúdo completo
                 articleContainer.innerHTML = `
-                    <h1>${article.titulo}</h1>
-                    <div class="article-meta">Publicado em ${new Date(data.items[0].sys.createdAt).toLocaleDateString('pt-BR')}</div>
+                    <h1>${fields.titulo}</h1>
+                    <div class="article-meta">
+                        <span>Publicado em ${new Date(article.sys.createdAt).toLocaleDateString('pt-BR')}</span>
+                        ${authorHtml ? `<span> &bull; ${authorHtml}</span>` : ''}
+                    </div>
                     ${imageHtml}
                     <div class="article-body">
                         ${fullContentHtml}
@@ -74,29 +93,4 @@ if (!slug) {
             console.error("Erro ao buscar o artigo do Contentful:", error);
             articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2>';
         });
-
-    // --- Função para converter Rich Text em HTML ---
-    // Você precisa de uma biblioteca para isso. A mais comum é a do próprio Contentful.
-    // Como não podemos adicionar bibliotecas externas aqui, vamos usar uma função simulada.
-    // Para o código funcionar DE VERDADE, você precisará adicionar o SDK do Contentful.
-    // Por agora, esta função irá apenas mostrar o conteúdo como texto simples.
-    function documentToHtmlString(richTextDocument) {
-        if (!richTextDocument || !richTextDocument.content) {
-            return '';
-        }
-        let html = '';
-        richTextDocument.content.forEach(node => {
-            if (node.nodeType === 'paragraph') {
-                let paragraphText = '';
-                node.content.forEach(innerNode => {
-                    if (innerNode.nodeType === 'text') {
-                        paragraphText += innerNode.value;
-                    }
-                });
-                html += `<p>${paragraphText}</p>`;
-            }
-            // Adicione mais 'if' aqui para outros tipos de nós (cabeçalhos, listas, etc.)
-        });
-        return html;
-    }
 });
