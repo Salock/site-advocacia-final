@@ -1,32 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA BUSCAR E EXIBIR O ARTIGO ---
-
-    // Suas chaves de acesso do Contentful
     const SPACE_ID = 'p2vxqfcphky1';
-    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
+    const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4'; // Chave de Content Delivery
     
     const articleContainer = document.getElementById('article-content');
-    
-    // Pega o "slug" (identificador do artigo) do endereço URL
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
 
     if (!slug) {
-        if (articleContainer) {
-            articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Identificador do artigo não fornecido no URL.</p>';
-        }
+        if(articleContainer) articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Identificador do artigo não fornecido no URL.</p>';
         return;
     }
 
-    // URL FINAL E CORRIGIDA: Adicionado o parâmetro 'select' para garantir que todos os campos necessários sejam retornados
-    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}&select=sys.createdAt,fields.titulo,fields.imagemPrincipal,fields.legendaDaImagem,fields.autorDoTexto,fields.conteudoCompleto`;
+    const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
 
     fetch(url)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Falha na resposta da rede: ' + response.status);
-            }
+            if (!response.ok) throw new Error('Falha na resposta da rede');
             return response.json();
         })
         .then(data => {
@@ -35,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fields = item.fields;
                 const assets = data.includes?.Asset || [];
 
-                document.title = `${fields.titulo || 'Artigo'} | Nexus Iuris`;
+                document.title = `${fields.titulo} | Nexus Iuris`;
 
                 let imageHtml = '';
                 if (fields.imagemPrincipal && assets.length > 0) {
@@ -60,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 let fullContentHtml = '';
+                // VERSÃO FINAL: Usa a biblioteca oficial do Contentful para traduzir o Rich Text
                 if (fields.conteudoCompleto && window.richTextHtmlRenderer) {
                     fullContentHtml = window.richTextHtmlRenderer.documentToHtmlString(fields.conteudoCompleto);
                 } else {
@@ -79,13 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
             } else {
-                articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2><p>Não foi encontrado nenhum artigo com este identificador.</p>';
+                articleContainer.innerHTML = '<h2>Artigo não encontrado.</h2>';
             }
         })
         .catch(error => {
             console.error("Erro ao buscar o artigo do Contentful:", error);
-            if (articleContainer) {
-                articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2><p>Por favor, tente novamente mais tarde.</p>';
-            }
+            if(articleContainer) articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2>';
         });
 });
