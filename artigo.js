@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA BUSCAR E EXIBIR O ARTIGO ---
-
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
     const articleContainer = document.getElementById('article-content');
@@ -15,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // URL FINAL E CORRIGIDA: Adicionado 'fields.conteudoCompleto' à lista do 'select'
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}&select=sys.createdAt,fields.titulo,fields.imagemPrincipal,fields.legendaDaImagem,fields.autorDoTexto,fields.conteudoCompleto`;
 
     fetch(url)
@@ -26,6 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
+
+            // ======================================================
+            // --- INÍCIO DO BLOCO DE DEPURAÇÃO FINAL ---
+            console.log("DADOS COMPLETOS RECEBIDOS DO CONTENTFUL:", data);
+            // --- FIM DO BLOCO DE DEPURAÇÃO FINAL ---
+            // ======================================================
+
             if (articleContainer && data.items && data.items.length > 0) {
                 const item = data.items[0];
                 const fields = item.fields;
@@ -62,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         fullContentHtml = '<p>O conteúdo completo deste artigo não está disponível.</p>';
                     }
-
                     articleContainer.innerHTML = `
                         <h1>${fields.titulo}</h1>
                         <div class="article-meta">
@@ -79,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const checkRendererAndRender = (tries = 0) => {
                     if (window.richTextHtmlRenderer) {
                         renderContent();
-                    } else if (tries < 50) { // Tenta por 5 segundos
+                    } else if (tries < 50) {
                         setTimeout(() => checkRendererAndRender(tries + 1), 100);
                     } else {
                         console.error("A biblioteca do Contentful demorou demasiado a carregar.");
