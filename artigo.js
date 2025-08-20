@@ -13,13 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}`;
 
-    // ========================================================
     // --- O NOSSO PRÓPRIO RENDERIZADOR DE RICH TEXT ---
-    // ========================================================
     const renderNode = (node) => {
         if (!node || !node.nodeType) return '';
-
-        // Renderizador para nós de texto com marcas (negrito, itálico, etc.)
         if (node.nodeType === 'text') {
             let text = node.value.replace(/\n/g, '<br>');
             if (node.marks) {
@@ -31,24 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return text;
         }
-
-        // Renderizador para outros tipos de blocos (parágrafos, títulos, listas)
         const nodeRenderers = {
             'paragraph': (node) => `<p>${renderContent(node.content)}</p>`,
             'heading-2': (node) => `<h2>${renderContent(node.content)}</h2>`,
             'heading-3': (node) => `<h3>${renderContent(node.content)}</h3>`,
             'unordered-list': (node) => `<ul>${renderContent(node.content)}</ul>`,
             'ordered-list': (node) => `<ol>${renderContent(node.content)}</ol>`,
-            'list-item': (node) => `<li>${renderContent(node.content).replace(/^<p>|<\/p>$/g, "")}</li>`, // Remove <p> extra dentro de <li>
+            'list-item': (node) => `<li>${renderContent(node.content).replace(/^<p>|<\/p>$/g, "")}</li>`,
             'hyperlink': (node) => `<a href="${node.data.uri}" target="_blank" rel="noopener noreferrer">${renderContent(node.content)}</a>`,
         };
-
         if (nodeRenderers[node.nodeType]) {
             return nodeRenderers[node.nodeType](node);
         }
         return '';
     };
-
     const renderContent = (content) => {
         if (!content) return '';
         return content.map(renderNode).join('');
@@ -61,14 +53,35 @@ document.addEventListener('DOMContentLoaded', () => {
             if (articleContainer && data.items && data.items.length > 0) {
                 const item = data.items[0];
                 const fields = item.fields;
+                const assets = data.includes?.Asset || []; // <-- Precisamos dos assets para a imagem
+
                 document.title = `${fields.titulo || 'Artigo'} | Nexus Iuris`;
+                
+                // ========================================================
+                // --- LÓGICA DA IMAGEM PRINCIPAL (ADICIONADA DE VOLTA) ---
+                // ========================================================
+                let imageHtml = '';
+                if (fields.imagemPrincipal && assets.length > 0) {
+                    const imageId = fields.imagemPrincipal.sys.id;
+                    const imageAsset = assets.find(asset => asset.sys.id === imageId);
+                    if (imageAsset) {
+                        const imageUrl = 'https:' + imageAsset.fields.file.url;
+                        const imageDescription = imageAsset.fields.description || fields.titulo;
+                        const imageCaption = fields.legendaDaImagem || '';
+                        imageHtml = `
+                            <figure class="post-figure">
+                                <img src="${imageUrl}" alt="${imageDescription}" class="article-main-image">
+                                ${imageCaption ? `<figcaption class="image-caption">${imageCaption}</figcaption>` : ''}
+                            </figure>
+                        `;
+                    }
+                }
 
                 let authorHtml = '';
                 if (fields.autorDoTexto) {
                     authorHtml = `por <strong>${fields.autorDoTexto}</strong>`;
                 }
 
-                // A MÁGICA ACONTECE AQUI: Usamos o NOSSO renderizador
                 const fullContentHtml = fields.conteudoCompleto ? renderContent(fields.conteudoCompleto.content) : '<p>O conteúdo completo deste artigo não está disponível.</p>';
 
                 articleContainer.innerHTML = `
@@ -77,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>Publicado em ${new Date(item.sys.createdAt).toLocaleDateString('pt-BR')}</span>
                         ${authorHtml ? `<span> &bull; ${authorHtml}</span>` : ''}
                     </div>
-                    <div class="article-body">
+                    ${imageHtml} <div class="article-body">
                         ${fullContentHtml}
                     </div>
                 `;
