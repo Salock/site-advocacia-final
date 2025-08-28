@@ -50,7 +50,7 @@ section {
     height: 100vh;
     scroll-snap-align: start;
     box-sizing: border-box;
-    padding: var(--altura-header) clamp(1rem, 4vw, 2.5rem) var(--altura-footer);
+    padding: var(--altura-header) 20px var(--altura-footer);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -150,35 +150,25 @@ header .logo img {
 /* ============================================== */
 /* --- TIPOGRAFIA RESPONSIVA --- */
 /* ============================================== */
-h1, h2 {
-    color: var(--cor-branca);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    margin-bottom: 20px;
-    font-size: clamp(2rem, 5vw, 3.5rem); 
+h1, h2 { 
+    color: var(--cor-branca); 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
+    margin-bottom: 20px; 
+    font-size: clamp(1,4rem, 3.5vw, 2.2rem); 
 }
-
-h3 {
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
-}
-
-p {
-    color: var(--cor-texto-claro);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
-    line-height: 1.6;
-}
+h3 { font-size: clamp(1.0rem, 2.5vw, 1.2rem); }
+p { color: var(--cor-texto-claro); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 700px; margin-left: auto; margin-right: auto; font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.6; }
 
 /* ================================================================= */
 /* --- ESTILO DA "FAIXA" DE CONTEÚDO --- */
 /* ================================================================= */
+
 section:not(#home) .container {
     background-color: rgba(255, 255, 255, 0.92);
-    padding: clamp(2rem, 5vw, 3rem);
+    padding: clamp(2.5rem, 5vw, 4rem);
     border-radius: 10px;
-    max-width: 850px;
+    max-width: 1100px;
+    width: 90%; 
     box-sizing: border-box;
 }
 
@@ -190,12 +180,12 @@ section:not(#home) .container a {
     text-shadow: none;
 }
 
-#contato form { width: 100%; margin-top: 20px; max-width: 650px; margin-left: auto; margin-right: auto; }
+#contato form { width: 100%; margin-top: 20px; max-width: 650px; margin-left: auto;margin-right: auto; }
 #contato form label { display: block; text-align: left; margin-bottom: 8px; font-weight: bold; }
 #contato form input, #contato form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: var(--fonte-principal); font-size: 1rem; }
-#contato form textarea { min-height: 150px; resize: vertical; }
+#contato form textarea { min-height: 120px; resize: vertical; }
 #contato form button { width: 100%; padding: 15px; font-size: 1.1rem; }
-.contact-intro { color: var(--cor-texto-claro); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 700px; margin-left: auto; margin-right: auto; margin-bottom: 40px; }
+.contact-intro { color: var(--cor-texto-claro); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 700px; margin-left: auto; margin-right: auto; margin-bottom: 25px; }
 .contact-intro a { color: var(--cor-secundaria); font-weight: bold; text-decoration: none; transition: opacity 0.3s ease; }
 .contact-intro a:hover { opacity: 0.8; text-decoration: underline; }
 
@@ -228,28 +218,29 @@ footer .social-icons a { display: inline-block; margin: 0 10px; transition: tran
 footer .social-icons a:hover { transform: scale(1.1); }
 footer .social-icons img { height: 30px; width: auto; }
 
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
-.modal-overlay.is-visible { opacity: 1; visibility: visible; }
-.modal-box { background: #fff; padding: 30px 40px; border-radius: 10px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateY(-20px); transition: transform 0.4s ease; }
-.modal-overlay.is-visible .modal-box { transform: translateY(0); }
-.modal-box h2 { color: #333; text-shadow: none; margin-top: 0; }
-.modal-box p { color: #555; text-shadow: none; }
-.modal-box .btn { margin-top: 20px; width: 100%; }
-
-.latest-articles-container { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
-.blog-post-banner { background-color: rgba(255, 255, 255, 0.95); border-radius: 8px; padding: 25px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.blog-post-banner:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.blog-post-banner h3 { font-size: 1.4rem; margin-top: 0; color: var(--cor-texto-escuro); text-shadow: none; }
-.blog-post-banner p { color: #555; text-shadow: none; flex-grow: 1; }
-.blog-post-banner .btn { margin-top: 20px; align-self: flex-start; }
+/* --- Estilos da Lista de Artigos --- */
+#blog .container h2 { margin-bottom: 40px; }
+.article-list-item { display: flex; align-items: center; gap: 20px; text-decoration: none; color: inherit; padding: 20px; border-radius: 8px; margin-bottom: 20px; background-color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.article-list-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.article-list-item:last-child { margin-bottom: 0; }
+.article-list-image { width: 130px; height: 90px; flex-shrink: 0; overflow: hidden; border-radius: 4px; }
+.article-list-image img { width: 100%; height: 100%; object-fit: cover; transition: all 0.4s ease; filter: grayscale(100%); }
+.article-list-item:hover .article-list-image img { filter: grayscale(0%); transform: scale(1.05); }
+.article-list-content { text-align: left; }
+.article-list-content h3 { margin: 0 0 8px 0; font-size: 1.2rem; line-height: 1.4; font-weight: 700; color: var(--cor-texto-escuro); transition: color 0.3s ease; }
+.article-list-item:hover .article-list-content h3 { color: var(--cor-secundaria); }
+.article-list-content .article-date { margin: 0; font-size: 0.9rem; color: #888; text-align: left; }
 
 #sobre h2 { text-align: center; margin-bottom: 40px; }
 .sobre-container { position: relative; width: 100%; }
 .pilar { background-color: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 10px; border-top: 3px solid var(--cor-secundaria); transition: background-color 0.4s ease, transform 0.4s ease, border-top-color 0.4s ease; display: flex; flex-direction: column; }
 @media (hover: hover) { .pilar:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateY(-5px); border-top-color: var(--cor-branca); } }
-.pilar h3 { font-size: 1.6rem; color: var(--cor-branca); text-shadow: none; margin-top: 0; margin-bottom: 20px; transition: color 0.4s ease; }
-.pilar p { -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-break: break-word; text-align: justify; color: var(--cor-texto-claro); text-shadow: none; line-height: 1.6; font-size: 1rem; transition: color 0.4s ease; flex-grow: 1; }
+.pilar h3 { font-size: 1.4rem; color: var(--cor-branca); text-shadow: none; margin-top: 0; margin-bottom: 20px; transition: color 0.4s ease; }
+.pilar p { -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-break: break-word; text-align: left; color: var(--cor-texto-claro); text-shadow: none; line-height: 1.6; font-size: 1rem; transition: color 0.4s ease; flex-grow: 1; }
 
+/* ============================================== */
+/* --- AJUSTES RESPONSIVOS (BREAKPOINTS) --- */
+/* ============================================== */
 @media (min-width: 1025px) {
     #sobre .pilares-carousel-track { display: flex; gap: 40px; align-items: flex-start; }
     #sobre .pilar { flex: 1 1 0; min-width: 0; }
@@ -269,10 +260,14 @@ footer .social-icons img { height: 30px; width: auto; }
     }
     header .logo img { height: 60px; }
     header nav { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; box-sizing: border-box; }
+    
     .menu-content { display: none; }
     .menu-dropdown.is-active .menu-content { display: flex; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(3, 3, 3, 0.98); border: none; border-radius: 0; padding: 0; margin: 0; }
     .menu-dropdown.is-active .menu-content li { margin: 20px 0; }
     .menu-dropdown.is-active .menu-content li a { font-size: 1.5rem; }
+
+    .article-list-item { flex-direction: column; align-items: flex-start; }
+    .article-list-image { width: 100%; height: 150px; }
 
     .sobre-container { padding: 0 20px; }
     .pilares-carousel-container { overflow: hidden; }
@@ -288,14 +283,37 @@ footer .social-icons img { height: 30px; width: auto; }
 }
 
 /* ============================================== */
-/* --- CORREÇÃO PARA CONTEÚDO CORTADO (OVERFLOW) --- */
+/* --- AJUSTES FINAIS DE ALINHAMENTO POR SEÇÃO --- */
 /* ============================================== */
-section .container {
-    max-height: calc(100vh - var(--altura-header) - var(--altura-footer) - 80px);
+
+/* Para seções de conteúdo longo como "Sobre" e "Blog", permite a rolagem interna */
+#sobre .container,
+#blog .container {
+    max-height: calc(100vh - var(--altura-header) - var(--altura-footer) - 20px);
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
-section .container::-webkit-scrollbar {
+#sobre .container::-webkit-scrollbar,
+#blog .container::-webkit-scrollbar {
     display: none;
 }
+
+/* Para seções de conteúdo curto como "Contato", centraliza verticalmente */
+#contato .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+/* ============================================== */
+/* --- ESTILOS DO POP-UP (MODAL) DE "OBRIGADO" --- */
+/* ============================================== */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s 0.4s; }
+.modal-overlay.is-visible { opacity: 1; visibility: visible; transition: opacity 0.4s ease; }
+.modal-box { background: #fff; padding: 30px 40px; border-radius: 10px; text-align: center; max-width: 450px; width: 90%; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transform: scale(0.9); transition: transform 0.4s ease; }
+.modal-overlay.is-visible .modal-box { transform: scale(1); }
+.modal-box h2 { color: var(--cor-texto-escuro); text-shadow: none; margin-top: 0; font-size: 1.8rem; }
+.modal-box p { color: #555; text-shadow: none; font-size: 1rem; line-height: 1.6; }
+.modal-box .btn { margin-top: 25px; width: 100%; padding: 12px; }
