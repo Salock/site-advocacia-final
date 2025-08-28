@@ -1,0 +1,63 @@
+/* Estilos para a página de artigo individual */
+
+.article-main {
+    padding-top: var(--altura-header); /* Espaço para o header fixo */
+    padding-bottom: var(--altura-footer); /* Espaço para o footer fixo */
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+#article-content {
+    background-color: #fff;
+    padding: 40px 50px;
+    margin: 40px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+#article-content h1 {
+    font-size: 2.8rem;
+    color: var(--cor-texto-escuro);
+    text-shadow: none;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.article-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.article-main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.article-body {
+    color: var(--cor-texto-escuro);
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.article-body p {
+    color: var(--cor-texto-escuro); /* Garante que os parágrafos do artigo tenham a cor certa */
+    text-shadow: none;
+    margin-bottom: 1.5em;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    #article-content {
+        padding: 25px 20px;
+        margin: 20px 0;
+    }
+
+    #article-content h1 {
+        font-size: 2rem;
+    }
+}

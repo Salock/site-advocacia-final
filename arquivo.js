@@ -1,73 +1,104 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA PARA BUSCAR E EXIBIR TODOS OS ARTIGOS NA PÁGINA DE ARQUIVO ---
-
-    // Suas chaves de acesso do Contentful
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
+    const articleContainer = document.getElementById('article-content');
 
-    // Pega o container da grelha de artigos no HTML
-    const archiveGrid = document.getElementById('archive-grid');
+    if (!articleContainer) return;
 
-    if (archiveGrid) {
-        // Monta a URL da API para buscar TODOS os artigos, ordenados pelos mais recentes
-        const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&select=sys.id,fields.titulo,fields.resumo,fields.imagemPrincipal,fields.slug,fields.autorDoTexto`;
+    // Função principal que busca e exibe os artigos
+    const fetchAndDisplayArticles = (category) => {
+        
+        // CORREÇÃO: Adicionamos "&include=1" ao final da URL
+        let url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&include=1`;
+
+        if (category !== 'todos') {
+            url += `&fields.categoria=${encodeURIComponent(category)}`;
+        }
+
+        const gridContainer = document.querySelector('.articles-grid');
+        if (gridContainer) {
+            gridContainer.innerHTML = '<p style="text-align: center;">Carregando artigos...</p>';
+        }
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
+                const assets = data.includes?.Asset || [];
+                let articlesHtml = '';
+
                 if (data.items && data.items.length > 0) {
-                    archiveGrid.innerHTML = ''; // Limpa a mensagem "Carregando..."
-
-                    const assets = data.includes?.Asset || [];
-
                     data.items.forEach(item => {
                         const fields = item.fields;
-                        const articleSlug = fields.slug || '#';
-
-                        // Lógica para a Imagem
-                        let imageHtml = '';
-                        if (fields.imagemPrincipal) {
-                            const imageId = fields.imagemPrincipal.sys.id;
-                            const imageAsset = assets.find(asset => asset.sys.id === imageId);
-                            if(imageAsset) {
-                                const imageUrl = 'https:' + imageAsset.fields.file.url;
-                                imageHtml = `<div class="article-card-image" style="background-image: url('${imageUrl}');"></div>`;
+                        
+                        let imageUrl = '';
+                        let imageClass = 'placeholder';
+                        if (fields.imagemPrincipal && assets.length > 0) {
+                            const imageAsset = assets.find(asset => asset.sys.id === fields.imagemPrincipal.sys.id);
+                            if (imageAsset) {
+                                imageUrl = `https:' + imageAsset.fields.file.url + '?w=400&h=400&fit=cover&fm=webp`;
+                                imageClass = '';
                             }
-                        } else {
-                            // Imagem placeholder caso o artigo não tenha uma
-                            imageHtml = `<div class="article-card-image placeholder"></div>`;
                         }
 
-                        // Lógica para o Autor
                         let authorHtml = '';
                         if (fields.autorDoTexto) {
-                            authorHtml = `<p class="post-author"><strong>Por:</strong> ${fields.autorDoTexto}</p>`;
+                            authorHtml = `<div class="post-author">por <strong>${fields.autorDoTexto}</strong></div>`;
                         }
 
-                        const articleCard = document.createElement('a');
-                        articleCard.href = `/artigo.html?slug=${articleSlug}`;
-                        articleCard.className = 'article-card';
-                        
-                        articleCard.innerHTML = `
-                            ${imageHtml}
-                            <div class="article-card-content">
-                                <h3>${fields.titulo}</h3>
-                                <p>${fields.resumo}</p>
-                                ${authorHtml}
-                                <span class="read-more-link">Ler Artigo Completo &rarr;</span>
-                            </div>
+                        articlesHtml += `
+                            <a href="artigo.html?slug=${fields.slug}" class="article-card">
+                                <div class="article-card-image ${imageClass}" style="background-image: url('${imageUrl}')"></div>
+                                <div class="article-card-content">
+                                    <h3>${fields.titulo}</h3>
+                                    <p>${fields.resumo}</p>
+                                    ${authorHtml}
+                                </div>
+                            </a>
                         `;
-                        
-                        archiveGrid.appendChild(articleCard);
                     });
                 } else {
-                    archiveGrid.innerHTML = '<p>Nenhum artigo encontrado.</p>';
+                    articlesHtml = '<p style="text-align: center;">Nenhum artigo encontrado para esta categoria.</p>';
+                }
+                
+                if (gridContainer) {
+                    gridContainer.innerHTML = articlesHtml;
                 }
             })
             .catch(error => {
-                console.error("Erro ao buscar os artigos do Contentful:", error);
-                archiveGrid.innerHTML = '<p>Ocorreu um erro ao carregar os artigos.</p>';
+                console.error("Erro ao buscar o arquivo de artigos:", error);
+                if (gridContainer) {
+                    gridContainer.innerHTML = '<p style="text-align: center;">Ocorreu um erro ao carregar os artigos.</p>';
+                }
             });
-    }
+    };
+
+    const setupFilters = () => {
+        const filterHtml = `
+            <h1>Arquivo de Artigos</h1>
+            <p>Explore nossa coleção de artigos sobre direito imobiliário e migratório.</p>
+            <div class="filter-container">
+                <button class="filter-btn active" data-category="todos">Todos</button>
+                <button class="filter-btn" data-category="Direito Imobiliário">Direito Imobiliário</button>
+                <button class="filter-btn" data-category="Direito Migratório">Direito Migratório</button>
+            </div>
+            <div class="articles-grid"></div>
+        `;
+        articleContainer.innerHTML = filterHtml;
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                fetchAndDisplayArticles(category);
+            });
+        });
+    };
+
+    document.title = 'Arquivo de Artigos | Nexus Iuris';
+    setupFilters();
+    fetchAndDisplayArticles('todos');
 });
