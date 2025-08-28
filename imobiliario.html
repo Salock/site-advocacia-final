@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title data-translate="imobiliario_page_title">VMatos Assessoria Jurídica | Direito Imobiliário</title>
+    <title data-translate="imobiliario_page_title">VMatos Assessoria Jurídica | Especialistas em Direito Imobiliário</title>
     <meta name="description" content="Segurança jurídica para seu imóvel em todas as etapas. Compra, venda, locação e regularização. Fale com especialistas." data-translate="imobiliario_meta_description">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="imagens/favicon.png">
@@ -38,7 +38,6 @@
                 <ul class="menu-content">
                     <li><a href="#home" data-translate="nav_home">Home</a></li>
                     <li><a href="#sobre" data-translate="nav_about">Sobre Nós</a></li>
-                    <li><a href="#areas" data-translate="nav_services">Áreas de Atuação</a></li>
                     <li><a href="#blog" data-translate="nav_articles">Artigos</a></li>
                     <li><a href="#contato" data-translate="nav_contact">Contato</a></li>
                 </ul>
@@ -64,7 +63,7 @@
                             <div class="pilares-carousel-track">
                                 <div class="pilar">
                                     <h3 data-translate="pilar1_title">Foco no Cliente</h3>
-                                    <p data-translate="pilar1_text">O VMatos Assessoria Jurídica foi fundado com a missão de atuar no mercado imobiliário, com foco na rescisão contratual de compra e venda de imóveis na planta...</p>
+                                    <p data-translate="pilar1_text">O Nexus Iuris foi fundado com a missão de atuar no mercado imobiliário, com foco na rescisão contratual de compra e venda de imóveis na planta...</p>
                                 </div>
                                 <div class="pilar">
                                     <h3 data-translate="pilar2_title">Soluções Estratégicas</h3>
@@ -83,15 +82,6 @@
                 </div>
             </section>
 
-            <section id="areas" class="fundo-animado-normal">
-                <div class="container">
-                    <h2 data-translate="areas_title">Nossas Áreas de Atuação</h2>
-                    <p data-translate="areas_item1">Contratos e Rescisões</p>
-                    <p data-translate="areas_item2">Direito do Consumidor</p>
-                    <p data-translate="areas_item3">Direito imobiliário</p>
-                </div>
-            </section>
-
             <section id="blog" class="fundo-animado-normal">
                 <div class="container">
                     <h2 data-translate="blog_title">Artigos Recentes</h2>
@@ -102,62 +92,23 @@
                 </div>
             </section>
 
-            <section id="depoimentos" class="fundo-animado-normal">
-                <div class="container">
-                    <h2 data-translate="depoimentos_title">O Que os Nossos Clientes Dizem</h2>
-                    <div class="carousel-container">
-                        <div class="carousel-track">
-                            <div class="carousel-slide">
-                                <p class="depoimento-texto" data-translate="testimonial1">"Depois de tanta dor de cabeça com a construtora, encontrei na vMatos Assessória Jurídica a segurança e solução para meus problemas”</p>
-                                <p class="depoimento-autor">- A. L. Costa </p>
-                            </div>
-                            <div class="carousel-slide">
-                                <p class="depoimento-texto" data-translate="testimonial2">"Profissionais que realmente se importam com o cliente. Fui bem orientado em cada etapa do meu processo e consegui meu dinheiro de volta."</p>
-                                <p class="depoimento-autor">- P. Oliveira</p>
-                            </div>
-                            <div class="carousel-slide">
-								<p class="depoimento-texto">“Só quem já teve o sonho destruído por uma construtora, sabe como é desesperador. A equipe VMatos Assessória Jurídica foi fundamental na rescisão do meu contrato e devolução dos valores que paguei.”</p>
-								<p class="depoimento-autor">- J.F. A. Santos</p>
-							</div>
-							<div class="carousel-slide">
-								<p class="depoimento-texto">“Comprei um apartamento da planta e me arrependi, achei que meu dinheiro estava perdido, mas com a ajuda da empresa consegui meu dinheiro de volta.”</p>
-								<p class="depoimento-autor">- C.A. Moura</p>
-							</div>
-							<div class="carousel-slide">
-								<p class="depoimento-texto">“Profissionais sérios de muita confiança. Obrigada por tudo”</p>
-								<p class="depoimento-autor">- M. T. M. Lima</p>
-							</div>
-                        </div>
-                    </div>
-                    <button class="carousel-button prev-button">&#10094;</button>
-                    <button class="carousel-button next-button">&#10095;</button>
-                    <div class="carousel-dots"></div>
-                </div>
-            </section>
-
             <section id="contato" class="fundo-animado-lento">
                 <div class="container">
                     <h2 data-translate="contato_title">Fale Conosco</h2>
-                    <p data-translate="contato_subtitle">Estamos prontos para ajudar. Envie sua mensagem!</p>
-                    
+                    <p class="contact-intro" data-translate="contato_intro_html"></p>
                     <form name="contato" method="POST" data-netlify="true">
                         <input type="hidden" name="form-name" value="contato" />
                         <p style="display: none;">
                             <label>Não preencha isto se for humano: <input name="bot-field" /></label>
                         </p>
-
                         <label for="nome" data-translate="form_name">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" data-translate-placeholder required>
-
+                        <input type="text" id="nome" name="nome" required>
                         <label for="telefone" data-translate="form_phone">Telefone/Celular:</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-8888" data-translate-placeholder required>
-
+                        <input type="tel" id="telefone" name="telefone" required>
                         <label for="email" data-translate="form_email">E-mail:</label>
-                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" data-translate-placeholder required>
-
+                        <input type="email" id="email" name="email" required>
                         <label for="mensagem" data-translate="form_message">Mensagem:</label>
-                        <textarea id="mensagem" name="mensagem" placeholder="Conte-nos sobre seu caso" data-translate-placeholder required></textarea>
-
+                        <textarea id="mensagem" name="mensagem" required></textarea>
                         <button type="submit" class="btn" data-translate="contato_button">Quero uma análise do meu caso</button>
                     </form>
                 </div>
@@ -180,7 +131,7 @@
             <button id="close-modal-btn" class="btn" data-translate="modal_button">Fechar</button>
         </div>
     </div>
-	
+    
     <script src="script.js"></script>
 </body>
 </html>
