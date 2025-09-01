@@ -1,37 +1,42 @@
-/* Estilos para a página de artigo individual */
+/* ============================================== */
+/* --- ESTILOS PARA A PÁGINA DE ARTIGO INDIVIDUAL (VERSÃO FINAL) --- */
+/* ============================================== */
+
+/* Garante a fonte principal e um fundo neutro */
 .article-main {
-    background-color: #f4f4f4;
+    background-color: #f8f9fa;
     padding: 40px 0;
     line-height: 1.8;
+    font-family: var(--fonte-principal);
 }
 
 #article-content {
     background-color: #fff;
-    padding: 30px 40px;
-    margin: 40px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 40px 50px;
+    margin: 40px auto;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: left;
 }
 
+/* Título e Meta-informações */
 #article-content h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: var(--cor-primaria); /* Preto */
     line-height: 1.3;
     margin-bottom: 10px;
 }
 
 .article-meta {
     font-size: 0.9rem;
-    color: #777;
+    color: #555;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #eee;
 }
 
+/* Imagem principal do artigo */
 .post-figure {
     margin: 30px 0;
 }
@@ -39,7 +44,7 @@
 .article-main-image {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-bottom: 10px;
 }
 
@@ -52,38 +57,59 @@
     font-style: italic;
 }
 
+/* --- CORREÇÕES DE COR PARA O CORPO DO ARTIGO --- */
+
+/* Garante que todos os parágrafos e títulos dentro do artigo sejam pretos */
+.article-body p,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+    color: var(--cor-primaria); /* Preto */
+}
+
 .article-body p {
     margin-bottom: 1.5em;
     font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-    #article-content {
-        padding: 25px 20px;
-        margin: 20px 0;
-    }
-    #article-content h1 {
-        font-size: 2rem;
-    }
+/* Deixa os links em azul, como solicitado */
+.article-body a {
+    color: #007bff; /* Um tom de azul padrão e acessível */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+.article-body a:hover {
+    color: #0056b3; /* Azul um pouco mais escuro no hover */
 }
 
-/* Estilos para imagens incorporadas no corpo do artigo */
+/* Imagens no meio do texto */
 .article-body .embedded-asset {
-    margin: 40px auto; /* Centraliza a figura e dá espaço vertical */
+    margin: 40px auto;
     max-width: 100%;
     text-align: center;
 }
-
 .article-body .embedded-asset img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Sombra suave */
 }
-
 .article-body .embedded-asset figcaption {
     font-size: 0.9rem;
     color: #777;
     margin-top: 10px;
     font-style: italic;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    #article-content {
+        padding: 25px 20px;
+        margin: 20px auto;
+        width: 90%;
+    }
+    #article-content h1 {
+        font-size: 2rem;
+    }
 }

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title>Carregando Artigo... | Nexus Iuris</title>
+    <title>Carregando Artigo... | VMatos Assessoria Jurídica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="artigo.css">
 </head>
@@ -15,8 +15,22 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="imagens/logo.png" alt="Logo Nexus Iuris - Voltar ao portal"></a>
+                <a href="index.html"><img src="imagens/logo.png" alt="Logo VMatos Assessoria Jurídica - Voltar ao portal"></a>
             </div>
+            
+            <div class="language-switcher">
+                <button class="lang-toggle-btn" aria-label="Selecionar Idioma">
+                    <span id="current-lang-text">PT</span>
+                    <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div class="lang-dropdown-content">
+                    <a href="#" data-lang="pt" class="lang-btn active">Português</a>
+                    <a href="#" data-lang="en" class="lang-btn">English</a>
+                    <a href="#" data-lang="es" class="lang-btn">Español</a>
+                    <a href="#" data-lang="fr" class="lang-btn">Français</a>
+                </div>
+            </div>
+
             <div class="menu-dropdown">
                 <button class="menu-toggle" aria-label="Abrir Menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,9 +38,8 @@
                     </svg>
                 </button>
                 <ul class="menu-content">
-                    <li><a href="imobiliario.html#home">Imobiliário</a></li>
-                    <li><a href="migratorio.html#home">Migratório</a></li>
-                    <li><a href="arquivo.html">Arquivo de Artigos</a></li>
+                    <li><a href="imobiliario.html">Imobiliário</a></li>
+                    <li><a href="migratorio.html">Migratório</a></li>
                 </ul>
             </div>
         </nav>
@@ -45,10 +58,11 @@
             <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer"><img src="imagens/whats.png" alt="WhatsApp"></a>
             <a href="https://instagram.com/nexus.iuris/" target="_blank" rel="noopener noreferrer"><img src="imagens/insta.png" alt="Instagram"></a>
         </div>
-        <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
+        <p data-translate="footer_text">&copy; 2025 VMatos Assessoria Jurídica. Todos os direitos reservados.</p>
     </footer>
-
-        <script src="script.js" defer></script>
-    <script src="artigo.js" defer></script>
+        
+    <script src="script.js"></script>
+    <script src="artigo.js"></script>
+        
 </body>
 </html>
