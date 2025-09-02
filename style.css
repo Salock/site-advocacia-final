@@ -154,9 +154,9 @@ h1, h2 {
     color: var(--cor-branca); 
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
     margin-bottom: 20px; 
-    font-size: clamp(1,4rem, 3.5vw, 2.2rem); 
+    font-size: clamp(1.8rem, 4vw, 2.8rem); 
 }
-h3 { font-size: clamp(1.0rem, 2.5vw, 1.2rem); }
+h3 { font-size: clamp(1rem, 2.5vw, 1.4rem); }
 p { color: var(--cor-texto-claro); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 700px; margin-left: auto; margin-right: auto; font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.6; }
 
 /* ================================================================= */
@@ -285,21 +285,19 @@ footer .social-icons img { height: 30px; width: auto; }
 /* ============================================== */
 /* --- AJUSTES FINAIS DE ALINHAMENTO POR SEÇÃO --- */
 /* ============================================== */
-
-/* Para seções de conteúdo longo como "Sobre" e "Blog", permite a rolagem interna */
 #sobre .container,
-#blog .container {
+#blog .container,
+#contato .container {
     max-height: calc(100vh - var(--altura-header) - var(--altura-footer) - 20px);
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 #sobre .container::-webkit-scrollbar,
-#blog .container::-webkit-scrollbar {
+#blog .container::-webkit-scrollbar,
+#contato .container::-webkit-scrollbar {
     display: none;
 }
-
-/* Para seções de conteúdo curto como "Contato", centraliza verticalmente */
 #contato .container {
     display: flex;
     flex-direction: column;

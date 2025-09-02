@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <title data-translate="imobiliario_page_title">VMatos Assessoria Jurídica | Especialistas em Direito Imobiliário</title>
-    <meta name="description" content="Segurança jurídica para seu imóvel em todas as etapas. Compra, venda, locação e regularização. Fale com especialistas." data-translate="imobiliario_meta_description">
+    <meta name="description" content="Segurança jurídica para seu imóvel em todas as etapas." data-translate="imobiliario_meta_description">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="imagens/favicon.png">
 </head>
@@ -63,15 +63,15 @@
                             <div class="pilares-carousel-track">
                                 <div class="pilar">
                                     <h3 data-translate="pilar1_title">Foco no Cliente</h3>
-                                    <p data-translate="pilar1_text">O Nexus Iuris foi fundado com a missão de atuar no mercado imobiliário, com foco na rescisão contratual de compra e venda de imóveis na planta...</p>
+                                    <p data-translate="pilar1_text"></p>
                                 </div>
                                 <div class="pilar">
                                     <h3 data-translate="pilar2_title">Soluções Estratégicas</h3>
-                                    <p data-translate="pilar2_text">Com uma visão estratégica e humanizada, identificamos a necessidade de um suporte jurídico que pudesse resguardar os direitos do consumidor...</p>
+                                    <p data-translate="pilar2_text"></p>
                                 </div>
                                 <div class="pilar">
                                     <h3 data-translate="pilar3_title">Equipe Especializada</h3>
-                                    <p data-translate="pilar3_text">Nossa equipe é composta por profissionais com vasto conhecimento em direito imobiliário e do consumidor...</p>
+                                    <p data-translate="pilar3_text"></p>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,6 @@
                 <div class="container">
                     <h2 data-translate="blog_title">Artigos e dúvidas frequentes</h2>
                     <div class="latest-articles-container"></div>
-                    
                 </div>
             </section>
 
@@ -119,7 +118,7 @@
             <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer"><img src="imagens/whats.png" alt="Ícone do WhatsApp"></a>
             <a href="https://instagram.com/nexus.iuris/" target="_blank" rel="noopener noreferrer"><img src="imagens/insta.png" alt="Ícone do Instagram"></a>
         </div>
-        <p data-translate="footer_text">&copy; 2025 VMatos Assessoria Jurídica. Todos os direitos reservados.</p>
+        <p data-translate="footer_text"></p>
     </footer>
 
     <div id="thank-you-modal" class="modal-overlay">
@@ -130,7 +129,50 @@
         </div>
     </div>
     
-	<script src="script.js"></script>
-	<script src="blog.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // LÓGICA DO BLOG.JS INTEGRADA DIRETAMENTE AQUI
+        (() => {
+            const language = localStorage.getItem('userLanguage') || 'pt';
+            const SPACE_ID = 'p2vxqfcphky1';
+            const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
+            const articlesParent = document.querySelector('.latest-articles-container');
+            if (!articlesParent) return;
+            const isMigratorioPage = document.body.classList.contains('page-migratorio');
+            const categoria = isMigratorioPage ? 'Direito Migratório' : 'Direito Imobiliário';
+            const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&fields.categoria=${encodeURIComponent(categoria)}&include=1`;
+            articlesParent.innerHTML = '<p style="color: #333;">Carregando artigos...</p>';
+            fetch(url).then(response => response.json()).then(data => {
+                const assets = data.includes?.Asset || [];
+                let articlesHtml = '';
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const fields = item.fields;
+                        const langSuffix = language === 'en' ? '' : `_${language}`;
+                        const titulo = fields[`titulo${langSuffix}`] || fields.titulo;
+                        const resumo = fields[`resumo${langSuffix}`] || fields.resumo;
+                        let imageUrl = 'imagens/placeholder.png';
+                        if (fields.imagemPrincipal) {
+                            const imageAsset = assets.find(asset => asset.sys.id === fields.imagemPrincipal.sys.id);
+                            if (imageAsset && imageAsset.fields && imageAsset.fields.file && imageAsset.fields.file.url) {
+                                imageUrl = 'https:' + imageAsset.fields.file.url + '?w=200&h=150&fm=webp';
+                            }
+                        }
+                        const date = new Date(item.sys.createdAt);
+                        const formattedDate = date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+                        if (titulo && resumo) {
+                            articlesHtml += `<a href="artigo.html?slug=${fields.slug}" class="article-list-item"><div class="article-list-image"><img src="${imageUrl}" alt="${titulo}"></div><div class="article-list-content"><h3>${titulo}</h3><p class="article-date">${formattedDate}</p></div></a>`;
+                        }
+                    });
+                }
+                if (articlesHtml === '') {
+                    const errorMessages = { pt: 'Nenhum artigo encontrado para esta categoria.', en: 'No articles found for this category.', es: 'No se encontraron artículos para esta categoría.', fr: 'Aucun article trouvé pour cette catégorie.' };
+                    articlesHtml = `<p style="color: #333;">${errorMessages[language] || errorMessages.en}</p>`;
+                }
+                articlesParent.innerHTML = articlesHtml;
+            }).catch(error => { console.error("Erro ao buscar os artigos (inline script):", error); articlesParent.innerHTML = '<p style="color: #333;">Ocorreu um erro ao carregar os artigos.</p>'; });
+        })();
+    </script>
+
 </body>
 </html>

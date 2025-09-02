@@ -6,124 +6,177 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title>Nexus Iuris | Especialistas em Direito Migratório</title>
-    <meta name="description" content="Assessoria completa para vistos, cidadania e residência no Brasil. Garanta a legalidade da sua estadia com nossos especialistas.">
+    
+    <title data-translate="migratorio_page_title">VMatos Assessoria Jurídica | Especialistas em Direito Migratório</title>
+    <meta name="description" content="Assessoria completa para vistos, cidadania e regularização migratória." data-translate="migratorio_meta_description">
+    
     <link rel="stylesheet" href="style.css">
-	<link rel="icon" type="image/png" href="imagens/favicon.png">
+    <link rel="icon" type="image/png" href="imagens/favicon.png">
 </head>
-<body class="page-migratorio">
+
+<body class="page-migratorio"> 
+
     <header>
-    <nav>
-        <div class="logo">
-            <a href="index.html"><img src="imagens/logo.png" alt="Logo Nexus Iuris"></a>
-        </div>
-        <div class="menu-dropdown">
-            <button class="menu-toggle" aria-label="Abrir Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="5" r="2"/>
-                    <circle cx="12" cy="12" r="2"/>
-                    <circle cx="12" cy="19" r="2"/>
-                </svg>
-            </button>
-            <ul class="menu-content">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#areas">Serviços</a></li>
-                <li><a href="#blog">Artigos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="imagens/logo.png" alt="Logo VMatos Assessoria Jurídica - Voltar ao portal"></a>
+            </div>
+            <div class="language-switcher">
+                <button class="lang-toggle-btn" aria-label="Selecionar Idioma">
+                    <span id="current-lang-text">PT</span>
+                    <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div class="lang-dropdown-content">
+                    <a href="#" data-lang="pt" class="lang-btn active">Português</a>
+                    <a href="#" data-lang="en" class="lang-btn">English</a>
+                    <a href="#" data-lang="es" class="lang-btn">Español</a>
+                    <a href="#" data-lang="fr" class="lang-btn">Français</a>
+                </div>
+            </div>
+            <div class="menu-dropdown">
+                <button class="menu-toggle" aria-label="Abrir Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+                    </svg>
+                </button>
+                <ul class="menu-content">
+                    <li><a href="#home" data-translate="nav_home">Home</a></li>
+                    <li><a href="#sobre" data-translate="nav_about">Sobre Nós</a></li>
+                    <li><a href="#blog" data-translate="nav_articles">Artigos</a></li>
+                    <li><a href="#contato" data-translate="nav_contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <div class="scroll-container">
         <main>
             <section id="home" class="hero fundo-animado-lento">
                 <div class="container">
-                    <h1>Assessoria para Vistos e Cidadania.</h1>
-                    <p>Realize seu sonho de viver ou investir no Brasil com segurança jurídica.</p>
-                    <a href="#contato" class="btn">Inicie sua Consulta</a>
+                    <h1 data-translate="migratorio_home_title">Visto brasileiro, transporte e moradia em um só lugar.</h1>
+                    <p data-translate="migratorio_home_subtitle">Sua história no Brasil começa aqui!</p>
+                    <a href="#contato" class="btn" data-translate="home_button">Fale Conosco</a>
                 </div>
             </section>
 
             <section id="sobre" class="fundo-animado-normal">
                 <div class="container">
-                    <h2>Especialistas em Direito Migratório</h2>
-                    <p>Texto sobre a experiência do escritório com direito migratório, focando nos desafios e soluções para estrangeiros no Brasil, processos de visto, naturalização, etc.</p>
-                </div>
-            </section>
-
-            <section id="areas" class="fundo-animado-normal">
-                <div class="container">
-                    <h2>Nossos Serviços de Imigração</h2>
-                    <p>Vistos de Trabalho e Investidor</p>
-                    <p>Processos de Naturalização e Cidadania</p>
-                    <p>Regularização Migratória e Residência Permanente</p>
+                    <h2 data-translate="sobre_title">Nossa Abordagem</h2>
+                    <div class="sobre-container">
+                        <div class="pilares-carousel-container">
+                            <div class="pilares-carousel-track">
+                                <div class="pilar">
+                                    <h3 data-translate="migratorio_pilar1_title">Acolhimento Humanizado</h3>
+                                    <p data-translate="migratorio_pilar1_text">Entendemos que a mudança para um novo país é um grande passo. Por isso, nossa missão é tornar sua chegada ao Brasil o mais fácil e acolhedora possível, cuidando de você em cada detalhe desde o primeiro momento.</p>
+                                </div>
+                                <div class="pilar">
+                                    <h3 data-translate="migratorio_pilar2_title">Solução Completa e Integrada</h3>
+                                    <p data-translate="migratorio_pilar2_text">Oferecemos uma assessoria que vai além da obtenção do visto. Cuidamos da sua recepção no aeroporto com transfer privativo, garantindo que você e suas malas cheguem ao seu destino com total segurança e conforto.</p>
+                                </div>
+                                <div class="pilar">
+                                    <h3 data-translate="migratorio_pilar3_title">Foco no seu Novo Começo</h3>
+                                    <p data-translate="migratorio_pilar3_text">Nós pensamos em toda a logística para que você não precise se preocupar. Nosso objetivo é garantir sua tranquilidade, permitindo que você se concentre no que realmente importa: o início da sua nova vida no Brasil.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-button prev-button sobre-prev">&#10094;</button>
+                        <button class="carousel-button next-button sobre-next">&#10095;</button>
+                        <div class="carousel-dots sobre-dots"></div>
+                    </div>
                 </div>
             </section>
 
             <section id="blog" class="fundo-animado-normal">
                 <div class="container">
-                    <h2>Artigos sobre Imigração</h2>
-                    <div class="latest-articles-container">
-                        </div>
-                    <div class="arquivo-link-container">
-                        <a href="#" class="btn">Ver todos os artigos</a>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="depoimentos" class="fundo-animado-normal">
-                <div class="container">
-                    <h2>O Que Nossos Clientes Dizem</h2>
-                    <div class="carousel-container">
-                        <div class="carousel-track">
-                            </div>
-                    </div>
-                    <button class="carousel-button prev-button">&#10094;</button>
-                    <button class="carousel-button next-button">&#10095;</button>
-                    <div class="carousel-dots"></div>
+                    <h2 data-translate="blog_title">Artigos e dúvidas frequentes</h2>
+                    <div class="latest-articles-container"></div>
                 </div>
             </section>
 
             <section id="contato" class="fundo-animado-lento">
                 <div class="container">
-                    <h2>Fale Conosco</h2>
-                    <p>Pronto para dar o próximo passo? Envie sua mensagem.</p>
-                    <form name="contato-migratorio" method="POST" data-netlify="true">
-                        <input type="hidden" name="form-name" value="contato-migratorio" />
-                        <p style="display:none;"><label>Não preencha: <input name="bot-field"></label></p>
-                        <label for="nome">Nome:</label>
+                    <h2 data-translate="contato_title">Fale Conosco</h2>
+                    <p class="contact-intro" data-translate="contato_intro_html">Fique à vontade para nos contatar diretamente por <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer">WhatsApp</a> ou <a href="mailto:seu-email-aqui@vmatos.com.br">E-mail</a>. Se preferir, preencha o formulário abaixo e nossa equipe retornará em breve.</p>
+                    <form name="contato" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contato" />
+                        <p style="display: none;">
+                            <label>Não preencha isto se for humano: <input name="bot-field" /></label>
+                        </p>
+                        <label for="nome" data-translate="form_name">Nome:</label>
                         <input type="text" id="nome" name="nome" required>
-                        <label for="telefone">Telefone/Celular:</label>
+                        <label for="telefone" data-translate="form_phone">Telefone/Celular:</label>
                         <input type="tel" id="telefone" name="telefone" required>
-                        <label for="email">E-mail:</label>
+                        <label for="email" data-translate="form_email">E-mail:</label>
                         <input type="email" id="email" name="email" required>
-                        <label for="mensagem">Mensagem:</label>
+                        <label for="mensagem" data-translate="form_message">Mensagem:</label>
                         <textarea id="mensagem" name="mensagem" required></textarea>
-                        <button type="submit" class="btn">Quero uma análise do meu caso</button>
+                        <button type="submit" class="btn" data-translate="contato_button">Quero uma análise do meu caso</button>
                     </form>
                 </div>
             </section>
         </main>
     </div>
-
-    <footer>
-         <div class="social-icons">
-            <a href="https://wa.me/5511952016791" target="_blank"><img src="imagens/whats.png" alt="WhatsApp"></a>
-            <a href="https://instagram.com/nexus.iuris/" target="_blank"><img src="imagens/insta.png" alt="Instagram"></a>
-        </div>
-        <p>&copy; 2025 Nexus Iuris. Todos os direitos reservados.</p>
-    </footer>
     
+    <footer class="main-footer">
+        <div class="social-icons">
+            <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer"><img src="imagens/whats.png" alt="Ícone do WhatsApp"></a>
+            <a href="https://instagram.com/nexus.iuris/" target="_blank" rel="noopener noreferrer"><img src="imagens/insta.png" alt="Ícone do Instagram"></a>
+        </div>
+        <p data-translate="footer_text"></p>
+    </footer>
+
     <div id="thank-you-modal" class="modal-overlay">
         <div class="modal-box">
-            <h2>Mensagem Enviada!</h2>
-            <p>Obrigado por entrar em contato. Responderemos assim que possível.</p>
-            <button id="close-modal-btn" class="btn">Fechar</button>
+            <h2 data-translate="modal_title">Mensagem Enviada!</h2>
+            <p data-translate="modal_text">Obrigado por entrar em contato. Responderemos assim que possível.</p>
+            <button id="close-modal-btn" class="btn" data-translate="modal_button">Fechar</button>
         </div>
     </div>
-	
+    
     <script src="script.js"></script>
+    <script>
+        // LÓGICA DO BLOG.JS INTEGRADA DIRETAMENTE AQUI
+        (() => {
+            const language = localStorage.getItem('userLanguage') || 'pt';
+            const SPACE_ID = 'p2vxqfcphky1';
+            const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
+            const articlesParent = document.querySelector('.latest-articles-container');
+            if (!articlesParent) return;
+            const isMigratorioPage = document.body.classList.contains('page-migratorio');
+            const categoria = isMigratorioPage ? 'Direito Migratório' : 'Direito Imobiliário';
+            const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&fields.categoria=${encodeURIComponent(categoria)}&include=1`;
+            articlesParent.innerHTML = '<p style="color: #333;">Carregando artigos...</p>';
+            fetch(url).then(response => response.json()).then(data => {
+                const assets = data.includes?.Asset || [];
+                let articlesHtml = '';
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const fields = item.fields;
+                        const langSuffix = language === 'en' ? '' : `_${language}`;
+                        const titulo = fields[`titulo${langSuffix}`] || fields.titulo;
+                        const resumo = fields[`resumo${langSuffix}`] || fields.resumo;
+                        let imageUrl = 'imagens/placeholder.png';
+                        if (fields.imagemPrincipal) {
+                            const imageAsset = assets.find(asset => asset.sys.id === fields.imagemPrincipal.sys.id);
+                            if (imageAsset && imageAsset.fields && imageAsset.fields.file && imageAsset.fields.file.url) {
+                                imageUrl = 'https:' + imageAsset.fields.file.url + '?w=200&h=150&fm=webp';
+                            }
+                        }
+                        const date = new Date(item.sys.createdAt);
+                        const formattedDate = date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+                        if (titulo && resumo) {
+                            articlesHtml += `<a href="artigo.html?slug=${fields.slug}" class="article-list-item"><div class="article-list-image"><img src="${imageUrl}" alt="${titulo}"></div><div class="article-list-content"><h3>${titulo}</h3><p class="article-date">${formattedDate}</p></div></a>`;
+                        }
+                    });
+                }
+                if (articlesHtml === '') {
+                    const errorMessages = { pt: 'Nenhum artigo encontrado para esta categoria.', en: 'No articles found for this category.', es: 'No se encontraron artículos para esta categoría.', fr: 'Aucun article trouvé pour cette catégorie.' };
+                    articlesHtml = `<p style="color: #333;">${errorMessages[language] || errorMessages.en}</p>`;
+                }
+                articlesParent.innerHTML = articlesHtml;
+            }).catch(error => { console.error("Erro ao buscar os artigos (inline script):", error); articlesParent.innerHTML = '<p style="color: #333;">Ocorreu um erro ao carregar os artigos.</p>'; });
+        })();
+    </script>
+
 </body>
 </html>
