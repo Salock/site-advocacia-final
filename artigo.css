@@ -26,6 +26,7 @@
     color: var(--cor-primaria); /* Preto */
     line-height: 1.3;
     margin-bottom: 10px;
+	text-shadow: none;
 }
 
 .article-meta {
@@ -67,11 +68,13 @@
 .article-body h5,
 .article-body h6 {
     color: var(--cor-primaria); /* Preto */
+	text-shadow: none;
 }
 
 .article-body p {
     margin-bottom: 1.5em;
     font-size: 1.1rem;
+	text-align: justify;
 }
 
 /* Deixa os links em azul, como solicitado */
@@ -113,3 +116,4 @@
         font-size: 2rem;
     }
 }
+
