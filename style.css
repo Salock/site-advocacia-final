@@ -251,14 +251,14 @@ footer .social-icons img { height: 30px; width: auto; }
 .sobre-container { position: relative; width: 100%; }
 .pilar { background-color: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 10px; border-top: 3px solid var(--cor-secundaria); transition: background-color 0.4s ease, transform 0.4s ease, border-top-color 0.4s ease; display: flex; flex-direction: column; }
 @media (hover: hover) { .pilar:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateY(-5px); border-top-color: var(--cor-branca); } }
-.pilar h3 { font-size: 1.4rem; color: var(--cor-branca); text-shadow: none; margin-top: 0; margin-bottom: 20px; transition: color 0.4s ease; }
+.pilar h3 { font-size: 1.4rem; color: var(--cor-branca); text-shadow: none; margin-top: 0; margin-bottom: 20px; transition: color 0.4s ease; min-height: 3em; }
 .pilar p { -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; word-break: break-word; text-align: left; color: var(--cor-texto-claro); text-shadow: none; line-height: 1.6; font-size: 1rem; transition: color 0.4s ease; flex-grow: 1; }
 
 /* ============================================== */
 /* --- AJUSTES RESPONSIVOS (BREAKPOINTS) --- */
 /* ============================================== */
 @media (min-width: 1025px) {
-    #sobre .pilares-carousel-track { display: flex; gap: 40px; align-items: flex-start; }
+    #sobre .pilares-carousel-track { display: flex; gap: 40px;  }
     #sobre .pilar { flex: 1 1 0; min-width: 0; }
     #sobre .carousel-button, #sobre .carousel-dots { display: none; }
 }

@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'imobiliario_desc': { pt: 'Soluções para a compra, venda e regularização do seu imóvel.', en: 'Solutions for the purchase, sale, and regularization of your property.', es: 'Soluciones para la compra, venta y regularización de su inmueble.', fr: 'Solutions pour l\'achat, la vente et la régularisation de votre bien immobilier.' },
         'migratorio_title': { pt: 'Direito Migratório', en: 'Immigration Law', es: 'Derecho Migratorio', fr: 'Droit de l\'Immigration' },
         'migratorio_desc': { pt: 'Assessoria para vistos, cidadania e residência no país.', en: 'Advisory for visas, citizenship, and residency in the country.', es: 'Asesoría para visas, ciudadanía y residencia en el país.', fr: 'Conseil pour les visas, la citoyenneté et la résidence dans le pays.' },
+        
+        /* --- NOVAS TRADUÇÕES ADICIONADAS --- */
+        'consumidor_title': { pt: 'Direito do Consumidor e Casa de Apostas Online', en: 'Consumer Law & Online Betting Houses', es: 'Derecho del Consumidor y Casas de Apuestas en Línea', fr: 'Droit de la Consommation & Maisons de Paris en Ligne' },
+        'consumidor_desc': { pt: 'Defesa especializada em conflitos com casas de apostas online.', en: 'Specialized defense in conflicts with online betting houses.', es: 'Defensa especializada en conflictos con casas de apuestas en línea.', fr: 'Défense spécialisée dans les conflits avec les maisons de paris en ligne.' },
+
         'footer_text': { pt: '© 2025 VMatos Assessoria Jurídica. Todos os direitos reservados.', en: '© 2025 VMatos Assessoria Jurídica. All rights reserved.', es: '© 2025 VMatos Assessoria Jurídica. Todos los derechos reservados.', fr: '© 2025 VMatos Assessoria Jurídica. Tous droits réservés.' }
     };
 
