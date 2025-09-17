@@ -70,9 +70,44 @@ document.addEventListener('DOMContentLoaded', () => {
             es: `Pensamos en cada detalle para que usted pueda concentrarse en lo que realmente importa: su nuevo comienzo en Brasil.`,
             fr: `Nous pensons à chaque détail pour que vous puissiez vous concentrer sur ce qui compte vraiment : votre nouveau départ au Brésil.`
         },
+
+        // =============================================
+        // --- TRADUÇÕES PÁGINA: DIREITO DO CONSUMIDOR ---
+        // =============================================
+        'consumidor_page_title': { pt: 'VMatos Assessoria | Direito do Consumidor para Casas de Apostas', en: 'VMatos Advisory | Consumer Law for Betting Houses', es: 'VMatos Asesoría | Derecho del Consumidor para Casas de Apuestas', fr: 'VMatos Conseil | Droit de la Consommation pour les Maisons de Paris' },
+        'consumidor_meta_description': { pt: 'Assessoria jurídica especializada em conflitos com casas de apostas online. Protegemos os seus direitos como consumidor.', en: 'Specialized legal advisory in conflicts with online betting houses. We protect your rights as a consumer.', es: 'Asesoría jurídica especializada en conflictos con casas de apuestas en línea. Protegemos sus derechos como consumidor.', fr: 'Conseil juridique spécialisé dans les conflits avec les maisons de paris en ligne. Nous protégeons vos droits en tant que consommateur.' },
+        'consumidor_home_title': { pt: 'Problemas com casa de apostas online?', en: 'Problems with online betting houses?', es: '¿Problemas con casas de apuestas en línea?', fr: 'Problèmes avec les maisons de paris en ligne ?' },
+        'consumidor_home_subtitle': { pt: 'Nós temos a solução!', en: 'We have the solution!', es: '¡Tenemos la solución!', fr: 'Nous avons la solution !' },
+        'consumidor_pilar1_titulo': { pt: 'Atuação especializada', en: 'Specialized Practice', es: 'Actuación Especializada', fr: 'Action Spécialisée' },
+        'consumidor_pilar1_texto': {
+            pt: `Atuamos como assessoria jurídica especializada em solucionar conflitos relacionados a casas de apostas online, empregando nosso conhecimento e experiência para resguardar seu direito enquanto consumidor ou terceiro interessado.`,
+            en: `We act as a specialized legal advisory to resolve conflicts related to online betting houses, using our knowledge and experience to safeguard your rights as a consumer or interested third party.`,
+            es: `Actuamos como asesoría jurídica especializada en solucionar conflictos relacionados con casas de apuestas en línea, empleando nuestro conocimiento y experiencia para resguardar su derecho como consumidor o tercero interesado.`,
+            fr: `Nous agissons en tant que conseil juridique spécialisé dans la résolution de conflits liés aux maisons de paris en ligne, en utilisant nos connaissances et notre expérience pour protéger vos droits en tant que consommateur ou tiers intéressé.`
+        },
+        'consumidor_pilar2_titulo': { pt: 'Abordagens técnicas', en: 'Technical Approaches', es: 'Enfoques Técnicos', fr: 'Approches Techniques' },
+        'consumidor_pilar2_texto': {
+            pt: `Com crescimento exponencial do mercado digital de jogos, aumenta-se também a complexidade legal, exigindo abordagens técnicas para garantir que seus direitos sejam resguardados.`,
+            en: `With the exponential growth of the digital gaming market, legal complexity also increases, requiring technical approaches to ensure your rights are protected.`,
+            es: `Con el crecimiento exponencial del mercado de juegos digitales, también aumenta la complejidad legal, exigiendo enfoques técnicos para garantizar que sus derechos sean protegidos.`,
+            fr: `Avec la croissance exponentielle du marché des jeux numériques, la complexité juridique augmente également, nécessitant des approches techniques pour garantir la protection de vos droits.`
+        },
+        'consumidor_pilar3_titulo': { pt: 'Proteção legal', en: 'Legal Protection', es: 'Protección Legal', fr: 'Protection Légale' },
+        'consumidor_pilar3_texto': {
+            pt: `Nosso principal objetivo é assegurar a proteção legal de nossos clientes no universo das apostas online e restabelecer a justiça onde houver violação de garantias.`,
+            en: `Our main objective is to ensure the legal protection of our clients in the world of online betting and to restore justice where there has been a violation of guarantees.`,
+            es: `Nuestro principal objetivo es asegurar la protección legal de nuestros clientes en el universo de las apuestas en línea y restablecer la justicia donde haya habido una violación de garantías.`,
+            fr: `Notre objectif principal est d'assurer la protection juridique de nos clients dans l'univers des paris en ligne et de rétablir la justice en cas de violation des garanties.`
+        },
+
+        // =============================================
+        // --- TRADUÇÕES PÁGINA DO PORTAL ---
+        // =============================================
+        'consumidor_title': { pt: 'Direito do Consumidor', en: 'Consumer Law', es: 'Derecho del Consumidor', fr: 'Droit de la Consommation' },
+        'consumidor_desc': { pt: 'Defesa especializada em conflitos com casas de apostas online.', en: 'Specialized defense in conflicts with online betting houses.', es: 'Defensa especializada en conflictos con casas de apuestas en línea.', fr: 'Défense spécialisée dans les conflits avec les maisons de paris en ligne.' },
         
         // =============================================
-        // --- TRADUÇÕES COMUNS A AMBAS AS PÁGINAS ---
+        // --- TRADUÇÕES COMUNS ---
         // =============================================
         'nav_home': { pt: 'Home', en: 'Home', es: 'Inicio', fr: 'Accueil' },
         'nav_about': { pt: 'Sobre Nós', en: 'About Us', es: 'Sobre Nosotros', fr: 'À Propos' },

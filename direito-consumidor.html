@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <title data-translate="consumidor_page_title">VMatos Assessoria | Direito do Consumidor para Casas de Apostas</title>
+    <meta name="description" content="Assessoria jurídica especializada em conflitos com casas de apostas online. Protegemos os seus direitos como consumidor." data-translate="consumidor_meta_description">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="imagens/favicon.png">
+</head>
+
+<body class="page-consumidor"> 
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="imagens/logo.png" alt="Logo VMatos Assessoria Jurídica - Voltar ao portal"></a>
+            </div>
+            <div class="language-switcher">
+                <button class="lang-toggle-btn" aria-label="Selecionar Idioma">
+                    <span id="current-lang-text">PT</span>
+                    <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div class="lang-dropdown-content">
+                    <a href="#" data-lang="pt" class="lang-btn active">Português</a>
+                    <a href="#" data-lang="en" class="lang-btn">English</a>
+                    <a href="#" data-lang="es" class="lang-btn">Español</a>
+                    <a href="#" data-lang="fr" class="lang-btn">Français</a>
+                </div>
+            </div>
+            <div class="menu-dropdown">
+                <button class="menu-toggle" aria-label="Abrir Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+                    </svg>
+                </button>
+                <ul class="menu-content">
+                    <li><a href="#home" data-translate="nav_home">Home</a></li>
+                    <li><a href="#sobre" data-translate="nav_about">Sobre Nós</a></li>
+                    <li><a href="#blog" data-translate="nav_articles">Artigos</a></li>
+                    <li><a href="#contato" data-translate="nav_contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="scroll-container">
+        <main>
+            <section id="home" class="hero fundo-animado-lento">
+                <div class="container">
+                    <h1 data-translate="consumidor_home_title">Problemas com casa de apostas online?</h1>
+                    <p data-translate="consumidor_home_subtitle">Nós temos a solução!</p>
+                    <a href="#contato" class="btn" data-translate="home_button">Fale Conosco</a>
+                </div>
+            </section>
+
+            <section id="sobre" class="fundo-animado-normal">
+                <div class="container">
+                    <h2 data-translate="sobre_title">Nossa Abordagem</h2>
+                    <div class="sobre-container">
+                        <div class="pilares-carousel-container">
+                            <div class="pilares-carousel-track">
+                                <div class="pilar">
+                                    <h3 data-translate="consumidor_pilar1_titulo">Atuação especializada</h3>
+                                    <p data-translate="consumidor_pilar1_texto">Atuamos como assessoria jurídica especializada em solucionar conflitos relacionados a casas de apostas online, empregando nosso conhecimento e experiência para resguardar seu direito enquanto consumidor ou terceiro interessado.</p>
+                                </div>
+                                <div class="pilar">
+                                    <h3 data-translate="consumidor_pilar2_titulo">Abordagens técnicas</h3>
+                                    <p data-translate="consumidor_pilar2_texto">Com crescimento exponencial do mercado digital de jogos, aumenta-se também a complexidade legal, exigindo abordagens técnicas para garantir que seus direitos sejam resguardados.</p>
+                                </div>
+                                <div class="pilar">
+                                    <h3 data-translate="consumidor_pilar3_titulo">Proteção legal</h3>
+                                    <p data-translate="consumidor_pilar3_texto">Nosso principal objetivo é assegurar a proteção legal de nossos clientes no universo das apostas online e restabelecer a justiça onde houver violação de garantias.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-button prev-button sobre-prev">&#10094;</button>
+                        <button class="carousel-button next-button sobre-next">&#10095;</button>
+                        <div class="carousel-dots sobre-dots"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="blog" class="fundo-animado-normal">
+                <div class="container">
+                    <h2 data-translate="blog_title">Artigos e dúvidas frequentes</h2>
+                    <div class="latest-articles-container"></div>
+                </div>
+            </section>
+
+            <section id="contato" class="fundo-animado-lento">
+                <div class="container">
+                    <h2 data-translate="contato_title">Fale Conosco</h2>
+                    <p class="contact-intro" data-translate="contato_intro_html"></p>
+                    <form name="contato" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contato" />
+                        <p style="display: none;">
+                            <label>Não preencha isto se for humano: <input name="bot-field" /></label>
+                        </p>
+                        <label for="nome" data-translate="form_name">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                        <label for="telefone" data-translate="form_phone">Telefone/Celular:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                        <label for="email" data-translate="form_email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                        <label for="mensagem" data-translate="form_message">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                        <button type="submit" class="btn" data-translate="contato_button">Quero uma análise do meu caso</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="social-icons">
+            <a href="https://wa.me/5511952016791" target="_blank" rel="noopener noreferrer"><img src="imagens/whats.png" alt="Ícone do WhatsApp"></a>
+            <a href="https://instagram.com/nexus.iuris/" target="_blank" rel="noopener noreferrer"><img src="imagens/insta.png" alt="Ícone do Instagram"></a>
+        </div>
+        <p data-translate="footer_text"></p>
+    </footer>
+
+    <div id="thank-you-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 data-translate="modal_title">Mensagem Enviada!</h2>
+            <p data-translate="modal_text">Obrigado por entrar em contato. Responderemos assim que possível.</p>
+            <button id="close-modal-btn" class="btn" data-translate="modal_button">Fechar</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // LÓGICA DO BLOG.JS INTEGRADA DIRETAMENTE AQUI
+        (() => {
+            const language = localStorage.getItem('userLanguage') || 'pt';
+            const SPACE_ID = 'p2vxqfcphky1';
+            const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
+            const articlesParent = document.querySelector('.latest-articles-container');
+            if (!articlesParent) return;
+            const isConsumidorPage = document.body.classList.contains('page-consumidor');
+            
+            // Lógica para definir a categoria
+            let categoria = 'Direito Imobiliário'; // Categoria padrão
+            if (document.body.classList.contains('page-migratorio')) {
+                categoria = 'Direito Migratório';
+            } else if (isConsumidorPage) {
+                categoria = 'Direito do Consumidor'; // Adapte este nome para ser EXATAMENTE como está no seu Contentful
+            }
+
+            const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&order=-sys.createdAt&fields.categoria=${encodeURIComponent(categoria)}&include=1`;
+            
+            articlesParent.innerHTML = '<p style="color: #333;">Carregando artigos...</p>';
+            fetch(url).then(response => response.json()).then(data => {
+                const assets = data.includes?.Asset || [];
+                let articlesHtml = '';
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const fields = item.fields;
+                        const langSuffix = language === 'en' ? '' : `_${language}`;
+                        const titulo = fields[`titulo${langSuffix}`] || fields.titulo;
+                        const resumo = fields[`resumo${langSuffix}`] || fields.resumo;
+                        let imageUrl = 'imagens/placeholder.png';
+                        if (fields.imagemPrincipal) {
+                            const imageAsset = assets.find(asset => asset.sys.id === fields.imagemPrincipal.sys.id);
+                            if (imageAsset && imageAsset.fields && imageAsset.fields.file && imageAsset.fields.file.url) {
+                                imageUrl = 'https:' + imageAsset.fields.file.url + '?w=200&h=150&fm=webp';
+                            }
+                        }
+                        const date = new Date(item.sys.createdAt);
+                        const formattedDate = date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+                        if (titulo && resumo) {
+                            articlesHtml += `<a href="artigo.html?slug=${fields.slug}" class="article-list-item"><div class="article-list-image"><img src="${imageUrl}" alt="${titulo}"></div><div class="article-list-content"><h3>${titulo}</h3><p class="article-date">${formattedDate}</p></div></a>`;
+                        }
+                    });
+                }
+                if (articlesHtml === '') {
+                    const errorMessages = { pt: 'Nenhum artigo encontrado para esta categoria.', en: 'No articles found for this category.', es: 'No se encontraron artículos para esta categoría.', fr: 'Aucun article trouvé pour cette catégorie.' };
+                    articlesHtml = `<p style="color: #333;">${errorMessages[language] || errorMessages.en}</p>`;
+                }
+                articlesParent.innerHTML = articlesHtml;
+            }).catch(error => { console.error("Erro ao buscar os artigos (inline script):", error); articlesParent.innerHTML = '<p style="color: #333;">Ocorreu um erro ao carregar os artigos.</p>'; });
+        })();
+    </script>
+
+</body>
+</html>

@@ -84,6 +84,14 @@ section::before {
 .page-migratorio #blog { background-image: url('imagens/migratorio-blog.jpg'); }
 .page-migratorio #contato { background-image: url('imagens/migratorio-contato.jpg'); }
 
+/* --- NOVAS IMAGENS PARA A PÁGINA DE CONSUMIDOR --- */
+/* Você precisará substituir 'caminho/para/imagem.jpg' pelas suas imagens reais */
+.page-consumidor #home { background-image: url('imagens/consumidor-home.jpg'); }
+.page-consumidor #sobre { background-image: url('imagens/consumidor-sobre.jpg'); }
+.page-consumidor #blog { background-image: url('imagens/consumidor-blog.jpg'); }
+.page-consumidor #contato { background-image: url('imagens/consumidor-contato.jpg'); }
+
+
 @keyframes kenburns {
     0% { background-size: 100%; }
     100% { background-size: 115%; }
@@ -138,7 +146,8 @@ header .logo img {
 .menu-content li a { color: var(--cor-secundaria); padding: 12px 20px; text-decoration: none; display: block; font-weight: bold; transition: background-color 0.3s, color 0.3s; }
 .menu-content li a:hover { background-color: var(--cor-secundaria); color: var(--cor-primaria); }
 
-.lang-toggle-btn { background-color: transparent; color: var(--cor-branca); padding: 8px 15px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+.lang-toggle-btn { background-color: transparent; color: var(--cor-branca); padding: 8px 15px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; cursor: pointer; display: flex;
+    align-items: center; gap: 5px; }
 .lang-toggle-btn .arrow-down { fill: var(--cor-branca); transition: transform 0.3s ease; }
 .language-switcher.is-open .lang-toggle-btn .arrow-down { transform: rotate(180deg); }
 .lang-dropdown-content { display: none; position: absolute; top: 120%; left: 50%; transform: translateX(-50%); background-color: var(--cor-primaria); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4); z-index: 10; border-radius: 8px; overflow: hidden; padding: 5px 0; }
@@ -165,17 +174,11 @@ p { color: var(--cor-texto-claro); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max
 
 section:not(#home) .container {
     background-color: rgba(255, 255, 255, 0.92);
-    padding: 1.5rem clamp(2.5rem, 5vw, 4rem);
+    padding: 2.5rem clamp(2.5rem, 5vw, 4rem);
     border-radius: 10px;
     max-width: 1100px;
     width: 90%; 
     box-sizing: border-box;
-}
-
-/* Ajuste de tamanho para os títulos das seções internas */
-section:not(#home) .container h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    margin-bottom: 30px;
 }
 
 section:not(#home) .container h2,
@@ -184,6 +187,12 @@ section:not(#home) .container h3,
 section:not(#home) .container a {
     color: var(--cor-texto-escuro);
     text-shadow: none;
+}
+
+/* Ajuste de tamanho para os títulos das seções internas */
+section:not(#home) .container h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin-bottom: 30px;
 }
 
 #contato form { width: 100%; margin-top: 20px; max-width: 650px; margin-left: auto;margin-right: auto; }
