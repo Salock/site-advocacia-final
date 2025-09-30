@@ -231,7 +231,7 @@ footer p { color: #FFD700; text-shadow: none; margin: 0; }
 footer .social-icons { margin-bottom: 15px; }
 footer .social-icons a { display: inline-block; margin: 0 10px; transition: transform 0.3s ease; }
 footer .social-icons a:hover { transform: scale(1.1); }
-footer .social-icons img { height: 30px; width: auto; }
+footer .social-icons img { height: 40px; width: auto; }
 
 /* --- Estilos da Lista de Artigos --- */
 #blog .container h2 { margin-bottom: 40px; }
@@ -331,3 +331,25 @@ footer .social-icons img { height: 30px; width: auto; }
 .modal-box h2 { color: var(--cor-texto-escuro); text-shadow: none; margin-top: 0; font-size: 1.8rem; }
 .modal-box p { color: #555; text-shadow: none; font-size: 1rem; line-height: 1.6; }
 .modal-box .btn { margin-top: 25px; width: 100%; padding: 12px; }
+
+/* ============================================== */
+/* --- CORREÇÃO: SUAVIZAR TRANSIÇÃO DE FUNDO NO MOBILE --- */
+/* ============================================== */
+
+/* 1. Define a animação de fade-in */
+@keyframes fadeInSection {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 2. Aplica a animação APENAS nas seções na versão mobile */
+@media (max-width: 768px) {
+    section {
+        /* Duração de 0.6s para a animação de aparecimento suave */
+        animation: fadeInSection 0.6s ease-in-out;
+    }
+}

@@ -115,11 +115,22 @@ body {
         margin-bottom: 20px;
     }
     .options-container {
-        flex-direction: column;
+        flex-direction: column; /* <-- ESTA É A LINHA QUE EMPILHA OS CARDS */
     }
     .option-card {
         height: 300px;
+		overflow: hidden;
     }
+
+    /* Ajustes no texto do card para mobile */
+    .option-card .option-content h2 {
+        font-size: 1.0rem;
+        line-height: 1.0;
+    }
+    .option-card .option-content p {
+        font-size: 0.9rem;
+    }
+
     .portal-footer {
         position: static;
         margin-top: 40px;
