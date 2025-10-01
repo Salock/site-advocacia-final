@@ -1,0 +1,141 @@
+### Backup das Seções Removidas
+
+---
+
+### 1. Seção "Áreas de Atuação"
+
+**HTML (para adicionar ao corpo da página):**
+```html
+<section id="areas" class="fundo-animado-normal">
+    <div class="container">
+        <h2 data-translate="areas_title">Nossas Áreas de Atuação</h2>
+        <p data-translate="areas_item1">Contratos e Rescisões</p>
+        <p data-translate="areas_item2">Direito do Consumidor</p>
+        <p data-translate="areas_item3">Direito imobiliário</p>
+    </div>
+</section>
+
+/* Imagens de Fundo */
+.page-imobiliario #areas { background-image: url('imagens/predio.jpg'); }
+.page-migratorio #areas { background-image: url('imagens/migratorio-areas.jpg'); }
+
+
+'nav_services': { pt: 'Áreas de Atuação', en: 'Practice Areas', es: 'Áreas de Actuación', fr: 'Domaines de Compétence' },
+'areas_title': { pt: 'Nossas Áreas de Atuação', en: 'Our Practice Areas', es: 'Nuestras Áreas de Actuación', fr: 'Nos Domaines de Compétence' },
+'areas_item1': { pt: 'Contratos e Rescisões', en: 'Contracts and Terminations', es: 'Contratos y Rescisiones', fr: 'Contrats et Résiliations' },
+'areas_item2': { pt: 'Direito do Consumidor', en: 'Consumer Law', es: 'Derecho del Consumidor', fr: 'Droit de la Consommation' },
+'areas_item3': { pt: 'Direito imobiliário', en: 'Real Estate Law', es: 'Derecho Inmobiliario', fr: 'Droit Immobilier' },
+
+<li><a href="#areas" data-translate="nav_services">Áreas de Atuação</a></li>
+
+<section id="depoimentos" class="fundo-animado-normal">
+    <div class="container">
+        <h2 data-translate="depoimentos_title">O Que os Nossos Clientes Dizem</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <p class="depoimento-texto" data-translate="testimonial1">"Depois de tanta dor de cabeça com a construtora, encontrei na Nexus Iuris a segurança e solução para meus problemas”</p>
+                    <p class="depoimento-autor">- A. L. Costa </p>
+                </div>
+                <div class="carousel-slide">
+                    <p class="depoimento-texto" data-translate="testimonial2">"Profissionais que realmente se importam com o cliente. Fui bem orientado em cada etapa do meu processo e consegui meu dinheiro de volta."</p>
+                    <p class="depoimento-autor">- P. Oliveira</p>
+                </div>
+                </div>
+        </div>
+        <button class="carousel-button prev-button">&#10094;</button>
+        <button class="carousel-button next-button">&#10095;</button>
+        <div class="carousel-dots"></div>
+    </div>
+</section>
+
+/* Imagens de Fundo */
+.page-imobiliario #depoimentos { background-image: url('imagens/carrossel.jpg'); }
+.page-migratorio #depoimentos { background-image: url('imagens/migratorio-carrossel.jpg'); }
+
+/* Estilos do Carrossel */
+.carousel-container { position: relative; max-width: 800px; margin: auto; overflow: hidden; background-color: var(--cor-branca); border-radius: 10px; color: var(--cor-texto-escuro); }
+.carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+.carousel-slide { min-width: 100%; box-sizing: border-box; padding: 40px 60px; text-align: center; }
+.carousel-slide p, .carousel-slide h3 { text-shadow: none; }
+.depoimento-texto { font-style: italic; font-size: 1.1rem; color: #555; margin-bottom: 20px; }
+.depoimento-autor { font-weight: bold; color: var(--cor-texto-escuro); }
+.carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 24px; line-height: 1; padding: 10px; cursor: pointer; border-radius: 50%; z-index: 10; transition: background-color 0.3s; }
+.carousel-button:hover { background-color: rgba(0, 0, 0, 0.8); }
+.prev-button { left: 15px; }
+.next-button { right: 15px; }
+.carousel-dots { text-align: center; padding: 15px 0 20px 0; }
+.carousel-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ddd; margin: 0 5px; cursor: pointer; transition: background-color 0.3s ease; }
+.carousel-dot.active { background-color: var(--cor-secundaria); }
+
+'depoimentos_title': { pt: 'O Que os Nossos Clientes Dizem', en: 'What Our Clients Say', es: 'Lo Que Dicen Nuestros Clientes', fr: 'Ce Que Disent Nos Clients' },
+'testimonial1': { pt: '"Depois de tanta dor de cabeça com a construtora, encontrei na VMatos Assessoria Jurídica a segurança e solução para meus problemas”', en: '"After so much trouble with the construction company, I found in VMatos Assessoria Jurídica the security and solution to my problems"', es: '"Después de tantos dolores de cabeza con la constructora, encontré en VMatos Assessoria Jurídica la seguridad y solución a mis problemas"', fr: '"Après tant de maux de tête avec l\'entreprise de construction, j\'ai trouvé chez VMatos Assessoria Jurídica la sécurité et la solution à mes problèmes"' },
+'testimonial2': { pt: '"Profissionais que realmente se importam com o cliente. Fui bem orientado em cada etapa do meu processo e consegui meu dinheiro de volta."', en: '"Professionals who truly care about the client. I was well-guided in every step of my process and got my money back."', es: '"Profesionales que realmente se preocupan por el cliente. Fui bien orientado en cada etapa de mi proceso y recuperé mi dinero."', fr: '"Des professionnels qui se soucient vraiment du client. J\'ai été bien guidé à chaque étape de mon processus et j\'ai récupéré mon argent."' },
+
+// ========================================================
+// --- LÓGICA DO CARROSSEL DE DEPOIMENTOS ---
+// ========================================================
+const depoimentosContainer = document.querySelector('#depoimentos');
+if (depoimentosContainer) {
+    const carouselBox = depoimentosContainer.querySelector('.carousel-container');
+    const track = depoimentosContainer.querySelector('.carousel-track');
+    const prevButton = depoimentosContainer.querySelector('.prev-button');
+    const nextButton = depoimentosContainer.querySelector('.next-button');
+    const dotsNav = depoimentosContainer.querySelector('.carousel-dots');
+
+    if (carouselBox && track && prevButton && nextButton && dotsNav) {
+        const slides = Array.from(track.children);
+        let currentIndex = 0;
+        let intervalId = null;
+
+        if (slides.length > 1) {
+            const advanceSlide = () => {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                moveToSlide(nextIndex);
+            };
+            const moveToSlide = (targetIndex) => {
+                if (!track) return;
+                track.style.transform = `translateX(-${100 * targetIndex}%)`;
+                const currentDot = dotsNav.querySelector('.active');
+                if(currentDot) currentDot.classList.remove('active');
+                const newDot = dotsNav.children[targetIndex];
+                if(newDot) newDot.classList.add('active');
+                currentIndex = targetIndex;
+            };
+            const startAutoplay = () => {
+                clearInterval(intervalId);
+                intervalId = setInterval(advanceSlide, 5000);
+            };
+            dotsNav.innerHTML = '';
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    moveToSlide(index);
+                    startAutoplay();
+                });
+                dotsNav.appendChild(dot);
+            });
+            nextButton.addEventListener('click', () => {
+                advanceSlide();
+                startAutoplay();
+            });
+            prevButton.addEventListener('click', () => {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                moveToSlide(prevIndex);
+                startAutoplay();
+            });
+            carouselBox.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+            carouselBox.addEventListener('mouseleave', () => {
+                startAutoplay();
+            });
+            startAutoplay();
+        } else {
+            prevButton.style.display = 'none';
+            nextButton.style.display = 'none';
+        }
+    }
+}

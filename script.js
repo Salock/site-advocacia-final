@@ -372,4 +372,67 @@ document.addEventListener('DOMContentLoaded', () => {
         handleResize();
         window.addEventListener('resize', handleResize);
     }
+	
+	/* =============== LÓGICA DO POP-UP (COM REAPARECIMENTO) =============== */
+    const popupOverlay = document.getElementById('popup-overlay');
+    const closeBtn = document.querySelector('.popup-close-btn');
+    const ctaBtn = document.querySelector('.popup-cta-btn');
+
+    // --- [NOVO] Variáveis de controle ---
+    let popupJaFoiFechado = false;
+    let popupJaReapareceu = false;
+
+    // Lógica para direcionar o botão para o WhatsApp
+    if (ctaBtn) {
+        const numeroWhatsApp = '5511952016791';
+        const mensagemPadrao = 'Olá! Li um artigo no site e gostaria de mais informações.';
+        const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemPadrao)}`;
+        ctaBtn.href = linkWhatsApp;
+        ctaBtn.target = '_blank';
+        ctaBtn.rel = 'noopener noreferrer';
+    }
+
+    // Função para mostrar o pop-up
+    function abrirPopup() {
+        if (popupOverlay) {
+            popupOverlay.style.display = 'flex';
+        }
+    }
+
+    // --- [MODIFICADO] Função para fechar o pop-up ---
+    function fecharPopup() {
+        if (popupOverlay) {
+            popupOverlay.style.display = 'none';
+        }
+
+        // Se é a primeira vez que o pop-up é fechado E ele ainda não reapareceu
+        if (!popupJaFoiFechado && !popupJaReapareceu) {
+            popupJaFoiFechado = true; // Marca que já foi fechado uma vez
+
+            // Inicia um cronômetro para reabrir o pop-up
+            setTimeout(() => {
+                abrirPopup();
+                popupJaReapareceu = true; // Marca que já reapareceu, para não repetir
+            }, 45000); // 45000 milissegundos = 45 segundos
+        }
+    }
+
+    // --- EVENTOS ---
+    // 1. Mostrar o pop-up inicial após 1.5 segundos
+    setTimeout(abrirPopup, 1500);
+
+    // 2. Fechar ao clicar no botão 'X'
+    if (closeBtn) {
+        closeBtn.addEventListener('click', fecharPopup);
+    }
+
+    // 3. Fechar ao clicar fora da caixa (no overlay)
+    if (popupOverlay) {
+        popupOverlay.addEventListener('click', (event) => {
+            if (event.target === popupOverlay) {
+                fecharPopup();
+            }
+        });
+    }
+	
 });

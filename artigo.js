@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- LÓGICA PARA BUSCAR E RENDERIZAR ARTIGO DO CONTENTFUL ---
     const SPACE_ID = 'p2vxqfcphky1';
     const ACCESS_TOKEN = '6SOiDvnwO4V8Ljl8OyHLhYpKvaWfAkxMIgm11ABtgb4';
     const articleContainer = document.getElementById('article-content');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=artigos&fields.slug=${slug}&include=1`;
 
     const renderNode = (node) => {
+        // ... (lógica de renderização do Contentful)
         if (!node || !node.nodeType) return '';
         if (node.nodeType === 'text') {
             let text = node.value.replace(/\n/g, '<br>');
@@ -28,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return text;
         }
-
         if (node.nodeType === 'embedded-asset-block') {
             const assetId = node.data.target.sys.id;
             const assetData = window.contentfulAssets.find(asset => asset.sys.id === assetId);
@@ -40,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return '';
         }
-
         const nodeRenderers = {
             'paragraph': (node) => `<p>${renderContent(node.content)}</p>`,
             'heading-2': (node) => `<h2>${renderContent(node.content)}</h2>`,
@@ -59,24 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (articleContainer && data.items && data.items.length > 0) {
+            // ... (lógica de preenchimento do artigo)
+             if (articleContainer && data.items && data.items.length > 0) {
                 const item = data.items[0];
                 const fields = item.fields;
                 window.contentfulAssets = data.includes?.Asset || [];
-
                 const langSuffix = savedLang === 'en' ? '' : `_${savedLang}`;
                 const titulo = fields[`titulo${langSuffix}`] || fields.titulo;
                 const legendaDaImagem = fields[`legendaDaImagem${langSuffix}`] || fields.legendaDaImagem;
-                
                 let conteudoCompleto;
                 if (savedLang === 'en') {
                     conteudoCompleto = fields.conteudoCompleto;
                 } else {
                     conteudoCompleto = fields[`contedoCompleto${langSuffix}`] || fields[`conteudoCompleto${langSuffix}`] || fields.conteudoCompleto;
                 }
-
                 document.title = `${titulo || 'Artigo'} | VMatos Assessoria Jurídica`;
-                
                 let imageHtml = '';
                 if (fields.imagemPrincipal && window.contentfulAssets.length > 0) {
                     const imageAsset = window.contentfulAssets.find(asset => asset.sys.id === fields.imagemPrincipal.sys.id);
@@ -86,14 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         imageHtml = `<figure class="post-figure"><img src="${imageUrl}" alt="${imageDescription}" class="article-main-image">${legendaDaImagem ? `<figcaption class="image-caption">${legendaDaImagem}</figcaption>` : ''}</figure>`;
                     }
                 }
-
                 let authorHtml = '';
                 if (fields.autorDoTexto) { authorHtml = `por <strong>${fields.autorDoTexto}</strong>`; }
-                
                 const formattedDate = new Date(item.sys.createdAt).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-                
                 const fullContentHtml = conteudoCompleto ? renderContent(conteudoCompleto.content) : '<p>O conteúdo completo deste artigo não está disponível.</p>';
-
                 articleContainer.innerHTML = `<h1>${titulo}</h1><div class="article-meta"><span>Publicado em ${formattedDate}</span>${authorHtml ? `<span> &bull; ${authorHtml}</span>` : ''}</div>${imageHtml}<div class="article-body">${fullContentHtml}</div>`;
             } else {
                 articleContainer.innerHTML = '<h2>Artigo não encontrado ou não disponível neste idioma.</h2>';
@@ -102,12 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => { console.error("Erro ao buscar o artigo do Contentful:", error); if (articleContainer) articleContainer.innerHTML = '<h2>Ocorreu um erro ao carregar o artigo.</h2>'; });
 
     // --- FUNCIONALIDADE PARA ESCONDER HEADER E FOOTER ---
-
+    // ... (lógica de esconder header/footer)
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
     const langSwitcher = document.querySelector('.language-switcher');
     const menuDropdown = document.querySelector('.menu-dropdown');
-
     if(header && footer && langSwitcher && menuDropdown) {
         if (window.innerWidth <= 768) {
             let lastScrollY = window.scrollY;
@@ -125,8 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.addEventListener('mousemove', (e) => {
                 const isLangMenuOpen = langSwitcher.classList.contains('is-open');
                 const isMainMenuOpen = menuDropdown.classList.contains('is-active');
-
-                // CONDIÇÃO CORRIGIDA PARA "SEGURAR" O MENU
                 if (e.clientY < 120 || isLangMenuOpen || isMainMenuOpen) {
                     header.style.transform = 'translateY(0)';
                 } else {
@@ -142,4 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
             footer.style.transition = 'transform 0.4s ease-in-out';
         }
     }
+
+    
 });
