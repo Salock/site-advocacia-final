@@ -411,6 +411,12 @@ footer .social-icons img { height: 40px; width: auto; }
     line-height: 1.6;
 }
 
+/* Remove a sombra de texto herdada do título e parágrafo do pop-up */
+.popup-content h2,
+.popup-content p {
+    text-shadow: none;
+}
+
 /* Botão de Call to Action (CTA) - Cor do WhatsApp */
 .popup-cta-btn {
     display: inline-block;
